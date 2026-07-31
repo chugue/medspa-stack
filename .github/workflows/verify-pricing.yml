@@ -1,0 +1,40 @@
+name: Verify vendor pricing
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - name: Re-read every vendor pricing page
+        id: check
+        run: node scripts/refresh-pricing.mjs
+        continue-on-error: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: price-review
+          path: price-review.json
+      - name: Open an issue if a published price moved
+        if: steps.check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const r = JSON.parse(fs.readFileSync('price-review.json', 'utf8'));
+            const changed = r.report.filter(x => x.status === 'CHANGED');
+            const body = [
+              `${changed.length} vendor page(s) no longer show a price we publish.`, '',
+              ...changed.map(c => `- **${c.name}** — missing \`${c.missingFromPage.join(', ')}\` · ${c.url}`),
+              '', 'Confirm each figure, update `src/data/vendors.json`, then bump `VERIFIED` in `src/data/site.js`.'
+            ].join('\n');
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title: `Pricing drift: ${changed.length} vendor(s) need review`,
+              body, labels: ['pricing'],
+            });

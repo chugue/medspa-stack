@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import { vendors, priced, money, VERIFIED_LABEL, KLASS_LABEL } from '../data/site.js';
+
+const emr = vendors.filter(v => v.klass === 'emr');
+const booking = vendors.filter(v => v.klass === 'booking');
+const withSetup = vendors.filter(v => v.setupFee);
+const promo = vendors.filter(v => v.promo);
+const cheapest = priced.slice(0, 6);
+---
+<Base
+  title="MedSpaStack — independent pricing research on med spa software"
+  description="Verified pricing, hidden fees and clinical-capability data for 24 med spa and aesthetics practice management platforms. Collected from vendor pages, dated, and updated weekly."
+>
+<h1>What med spa software actually costs</h1>
+
+<p class="lede">
+  We track published pricing, setup fees and add-on charges for {vendors.length} med spa and
+  aesthetics platforms, and record which ones have real medical charting versus which are
+  booking systems wearing a clinical label. Every number carries the date we read it off the
+  vendor's own page.
+</p>
+
+<div class="note accent">
+  <p>
+    <strong>Why this site exists.</strong> Advertised starting prices in this category are close to
+    meaningless. Of the {priced.length} platforms that publish a price at all, {promo.length} are
+    quoting a promotional or annual-prepay rate rather than their standard one, several bill per
+    location or per user rather than per business, and nearly every one charges separately for the
+    features a med spa actually needs — charting, e-prescribing, forms, marketing. We publish the
+    whole bill, not the headline.
+  </p>
+</div>
+
+<h2>Start here</h2>
+<div class="cards">
+  <a class="card" href="/pricing/">
+    <div class="n">The pricing database</div>
+    <div class="p">All {vendors.length} platforms, every published tier, setup fees and add-on costs in one table.</div>
+  </a>
+  <a class="card" href="/emr-vs-booking/">
+    <div class="n">EMR or booking system?</div>
+    <div class="p">{emr.length} of these have real medical charting. {booking.length} do not. This is the decision most buyers get wrong first.</div>
+  </a>
+  <a class="card" href="/cost-calculator/">
+    <div class="n">Real cost calculator</div>
+    <div class="p">Enter your locations, providers and the modules you need. See the twelve-month total, not the sticker price.</div>
+  </a>
+  <a class="card" href="/methodology/">
+    <div class="n">How we collect this</div>
+    <div class="p">Where the numbers come from, what we refuse to score, and who pays us.</div>
+  </a>
+</div>
+
+<h2>Lowest published starting prices</h2>
+<p>
+  Sorted by advertised entry price. Read the billing note before drawing conclusions — several of
+  these are per user or per location, which changes the maths completely once you have a team.
+</p>
+
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>Platform</th><th>Type</th><th class="num">From</th><th>Billing basis</th><th class="num">Setup fee</th></tr>
+  </thead>
+  <tbody>
+    {cheapest.map(v => (
+      <tr>
+        <td><a href={`/software/${v.slug}/`}>{v.displayName}</a></td>
+        <td><span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span></td>
+        <td class="num">{money(v.startingPrice)}/mo</td>
+        <td>{(v.entryNote || '—').split(';')[0]}</td>
+        <td class="num">{v.setupFee ? money(v.setupFee) : '—'}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+</div>
+<p><a href="/pricing/">See all {vendors.length} platforms →</a></p>
+
+<h2>The three most expensive assumptions</h2>
+
+<h3>1. That the advertised price is per business</h3>
+<p>
+  It usually is not. Boulevard, Mangomint, Mindbody and Square Appointments price
+  <em>per location</em>. Aesthetic Record and Fresha price <em>per user</em> — Aesthetic Record's
+  $15 entry tier becomes $90 a month for a six-person clinic before a single add-on, and it carries
+  a $399 onboarding fee that appears nowhere near the headline. Two platforms with similar sticker
+  prices can differ threefold on the invoice.
+</p>
+
+<h3>2. That clinical charting is included</h3>
+<p>
+  Fresha, Vagaro, Square Appointments, WellnessLiving, Mindbody and Booker have no medical
+  charting at all. They are excellent booking systems. If you inject, laser or prescribe, you will
+  be buying a second system — a cost that rarely appears in any comparison table.
+  <a href="/emr-vs-booking/">We sorted every platform on this axis.</a>
+</p>
+
+<h3>3. That the annual price is the price</h3>
+<p>
+  Most published rates in this category assume annual prepayment, and several are promotional.
+  Boulevard's listed $140 tier is a summer promotion against a $176 standard rate, on annual
+  billing, per location. We record the standard rate alongside the promotional one.
+</p>
+
+<hr />
+<p class="stamp">
+  Pricing last verified {VERIFIED_LABEL} against each vendor's own published pricing page.
+  Vendors change prices without notice; we recheck weekly and stamp every figure.
+  Spotted something stale or wrong? <a href="/about/">Tell us</a> — corrections get published.
+</p>
+</Base>

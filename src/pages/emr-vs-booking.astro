@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import { vendors, money, VERIFIED_LABEL, KLASS_LABEL, KLASS_NOTE } from '../data/site.js';
+
+const groups = ['emr', 'hybrid', 'booking', 'adjacent', 'unclear'];
+const byKlass = Object.fromEntries(groups.map(k => [k, vendors.filter(v => v.klass === k)]));
+---
+<Base
+  title="Med spa EMR vs booking software — which platforms actually have clinical charting"
+  description={`Of ${vendors.length} med spa platforms, ${byKlass.emr.length} have genuine medical charting and ${byKlass.booking.length} have none at all. Which is which, and why buying the wrong one costs you twice.`}
+>
+<div class="crumb"><a href="/">Home</a> → EMR vs booking</div>
+<h1>EMR or booking system? Sorting {vendors.length} platforms</h1>
+
+<p class="lede">
+  The most expensive mistake in this category is buying a beautiful booking platform and
+  discovering, after migration, that it cannot chart a treatment. These products are marketed with
+  nearly identical language. They are not nearly identical.
+</p>
+
+<div class="note warn">
+  <p>
+    <strong>Scope note.</strong> This page is about software capability, not clinical or legal
+    advice. What your practice is required to document, who must supervise it, and which records
+    you must retain are questions for your medical director and your state board — not for a
+    software comparison site. We stay on the software.
+  </p>
+</div>
+
+<h2>The distinction that matters</h2>
+<p>
+  Practically every platform here can take a booking, run a card and send a reminder text. The
+  divide is what happens in the treatment room.
+</p>
+<p>
+  A <strong>clinical EMR</strong> records the procedure: structured or SOAP-style notes, injection
+  maps, treatment-specific consent capture, before-and-after photography tied to the patient
+  record, and usually e-prescribing. A <strong>booking and POS system</strong> records the
+  transaction. It may offer intake forms and file attachments, which look adjacent to charting and
+  are not the same thing.
+</p>
+<p>
+  If your practice performs injectables, energy-based treatments, or anything requiring a
+  prescription, a booking-only platform means you will run a second system alongside it. That
+  second system is a real line item, and it almost never appears in the comparison tables that
+  put these products side by side.
+</p>
+
+{groups.map(k => byKlass[k].length > 0 && (
+  <section>
+    <h2><span class={`tag ${k}`}>{KLASS_LABEL[k]}</span> — {byKlass[k].length} platform{byKlass[k].length > 1 ? 's' : ''}</h2>
+    <p>{KLASS_NOTE[k]}</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Platform</th><th class="num">From</th><th>What we verified</th></tr></thead>
+      <tbody>
+      {byKlass[k].map(v => (
+        <tr>
+          <td><a href={`/software/${v.slug}/`}>{v.displayName}</a></td>
+          <td class="num">{v.startingPrice != null ? money(v.startingPrice) + '/mo' : 'Quote'}</td>
+          <td>{v.clinical}</td>
+        </tr>
+      ))}
+      </tbody>
+    </table>
+    </div>
+  </section>
+))}
+
+<h2>How to use this</h2>
+<p>
+  Work out which column you belong in before you shortlist, not after. Three questions settle it:
+</p>
+<ol>
+  <li>
+    <strong>Does a licensed provider perform a procedure that must be documented?</strong>
+    If yes, you need the clinical column — or a booking platform plus a separate EMR, budgeted as
+    two subscriptions.
+  </li>
+  <li>
+    <strong>Does anyone prescribe?</strong> E-prescribing is a paid module almost everywhere it
+    exists. Aesthetic Record charges $31–45 per prescriber depending on term; AestheticsPro bundles
+    it only at the top tier. Price it separately.
+  </li>
+  <li>
+    <strong>How many locations and how many providers?</strong> This decides more of your bill than
+    the platform choice does. Per-location pricing punishes multi-site; per-user pricing punishes
+    large teams. <a href="/cost-calculator/">Run both through the calculator.</a>
+  </li>
+</ol>
+
+<h2>Where we would not trust a label</h2>
+<p>
+  {byKlass.unclear.length} platforms market clinical capability in terms we could not verify from
+  public documentation — {byKlass.unclear.map(v => v.displayName).join(', ')}. That is not an accusation;
+  quote-only vendors reasonably keep detail behind a sales conversation. But we will not score a
+  capability we have not been able to check, and neither should you. Ask for a charting
+  demonstration with your own treatment types before signing.
+</p>
+
+<hr />
+<p class="stamp">
+  Classifications above are our editorial judgment applied to vendor documentation read on
+  {VERIFIED_LABEL}. Where a vendor disputes a classification we will publish their position
+  alongside ours. <a href="/methodology/">Full methodology</a>.
+</p>
+</Base>

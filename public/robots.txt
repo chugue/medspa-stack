@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://medspastack.net/sitemap-index.xml

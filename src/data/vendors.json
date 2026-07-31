@@ -1,0 +1,993 @@
+[
+  {
+    "slug": "square-appointments",
+    "name": "Square Appointments",
+    "url": "https://squareup.com/us/en/appointments",
+    "pricingUrl": "https://squareup.com/us/en/appointments/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Free",
+        "monthly_price_usd": 0,
+        "billing_note": "$0/mo, processing fees only",
+        "what_it_includes": "Core booking and POS; 2.6% + 15¢ in-person processing"
+      },
+      {
+        "tier_name": "Plus",
+        "monthly_price_usd": 49,
+        "billing_note": "\"$49/mo. per location\"; free trial offered (length rendered as a template variable on the page, not a fixed number)",
+        "what_it_includes": "Lower in-person processing at 2.5% + 15¢, 500 texts included then 3¢ per text"
+      },
+      {
+        "tier_name": "Premium",
+        "monthly_price_usd": 149,
+        "billing_note": "\"$149/mo. per location\"; free trial offered",
+        "what_it_includes": "Lowest in-person processing at 2.4% + 15¢, 2,500 texts included then 1.5¢ per text, 0% gift card load fee"
+      },
+      {
+        "tier_name": "Pro",
+        "monthly_price_usd": null,
+        "billing_note": "\"Get custom pricing\" — \"If you process over $250,000 per year, talk to our team\"",
+        "what_it_includes": "Custom rates"
+      }
+    ],
+    "startingPrice": 0,
+    "setupFee": 0,
+    "freeTrial": "yes on Plus and Premium — the page renders the length as an unresolved template variable (\"{{sub2_api.num_free_trial_days}} days\") rather than a fixed number, so the exact length could not be verified from the page",
+    "hiddenCosts": "The $0 plan's true cost is processing: 2.6% + 15¢ in-person on Free versus 2.4% + 15¢ on Premium, so a high-volume med spa can pay for the subscription purely in rate savings — or lose money staying free. Manual entry and card-on-file are 3.5% + 15¢ on EVERY tier, which is punishing for a memberships-and-packages med spa that stores cards. Afterpay is 6% + 30¢. Gift card load fee is 2.5% on Free and Plus, 0% only on Premium. Text marketing overage is 3¢/text on Plus and 1.5¢/text on Premium. Pricing is per location. Hardware is sold separately. NOTE: online processing showed inconsistently on the page (2.9% + 30¢ generally, 3.3% + 30¢ against Plus) — verify the online rate directly with Square before publishing it.",
+    "processing": "In-person: Free 2.6% + 15¢, Plus 2.5% + 15¢, Premium 2.4% + 15¢. Online: 2.9% + 30¢ (Plus row displayed 3.3% + 30¢ — inconsistent on page). Manual entry / card on file: 3.5% + 15¢ all tiers. Afterpay: 6% + 30¢",
+    "hipaa": "No HIPAA compliance or BAA statement appears on the Square Appointments pricing page. Square is not positioned as a HIPAA-covered platform for this product.",
+    "segment": "solo to single-location salon-spa booking and retail POS; not a medical platform",
+    "clinical": "Booking/POS only. No medical charting, no SOAP notes, no e-prescribing, no before/after photos, no consent form module. Not an EMR and not suitable as a standalone system for a clinical med spa.",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": "Free",
+    "entryNote": "$0/mo, processing fees only",
+    "displayName": "Square Appointments",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "fresha",
+    "name": "Fresha",
+    "url": "https://www.fresha.com",
+    "pricingUrl": "https://www.fresha.com/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Independent",
+        "monthly_price_usd": 19.95,
+        "billing_note": "flat, for one-person businesses; \"7 day trial\"",
+        "what_it_includes": "Full core platform, 100 free messages, 50 free marketing emails"
+      },
+      {
+        "tier_name": "Team",
+        "monthly_price_usd": 14.95,
+        "billing_note": "\"$14.95 per month per bookable team member\"; \"7 day trial\"",
+        "what_it_includes": "Full core platform, 100 free messages per team member, 50 free marketing emails per team member, free Premium Support"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "\"Custom rates\" for \"high-volume businesses with over 20 team members\"",
+        "what_it_includes": "Custom"
+      }
+    ],
+    "startingPrice": 14.95,
+    "setupFee": null,
+    "freeTrial": "yes — 7 day trial on both Independent and Team plans",
+    "hiddenCosts": "THE MARKETPLACE COMMISSION IS THE REAL COST: Fresha charges a \"20% one-time commission\" on new clients booked through its marketplace, with a \"Minimum fee of $6 per client applies.\" Returning clients are free. This is not a line item most buyers model. Everything else is metered: SMS/WhatsApp 100 free monthly then \"$0.02 per text\" or \"$0.04 - $0.11 per WhatsApp\"; marketing emails 50 free then \"$0.02 per email\"; marketing texts \"$0.08 per text.\" Add-ons stack fast — AI Concierge \"$99.95 per location, monthly\" (200 mins included, \"$0.60 per extra min\"; 500 messages included, \"$0.04 per extra msg\"), Client Loyalty \"$59.95 per location, monthly,\" Google Rating Boost \"$14.95 per location, monthly,\" Team Connect \"$2.95 per team member, monthly,\" Insights \"$9.95 per bookable team member, monthly,\" Data Connector \"$295 per location, monthly,\" Premium Support \"$14.95 monthly\" (free on Team). Card terminals \"From $139 per device.\" Klarna BNPL is \"5.99% + $0.30 per transaction.\" Manual card entry jumps to \"3.30% + $0.20.\"",
+    "processing": "Online 2.79% + $0.20; in-person 2.29% + $0.20 (+$0.10 per Tap to pay authorization); manual card entry 3.30% + $0.20; Klarna BNPL 5.99% + $0.30",
+    "hipaa": "Pricing page lists \"HIPAA compliance\" alongside ISO 9001, ISO 27001 and GDPR, with quarterly Security Metrics testing (https://www.fresha.com/pricing). No BAA offer stated.",
+    "segment": "solo to multi-location salon-spa booking; marketplace-led customer acquisition model",
+    "clinical": "Booking/POS only. Consultation forms are included, but there is no medical charting, no SOAP notes, no e-prescribing, and no before/after photo module published. Not an EMR — a clinical med spa would need a separate charting system.",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "user",
+    "entryTier": "Team",
+    "entryNote": "\"$14.95 per month per bookable team member\"; \"7 day trial\"",
+    "displayName": "Fresha",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "aesthetic-record",
+    "name": "Aesthetic Record",
+    "url": "https://www.aestheticrecord.com",
+    "pricingUrl": "https://www.aestheticrecord.com/pricing/",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Essentials",
+        "monthly_price_usd": 15,
+        "billing_note": "per user per month, plus a one-time \"$399 Startup & Onboarding Investment\"",
+        "what_it_includes": "Photo management, procedure charting, medical director oversight, automated reminders, memberships, patient portal, inventory management; 2 GB storage per user, 250 SMS/month, 300 emails/month"
+      },
+      {
+        "tier_name": "Accelerator",
+        "monthly_price_usd": 19,
+        "billing_note": "per user per month, plus a one-time \"$399 Startup & Onboarding Investment\"",
+        "what_it_includes": "All Essentials features plus third-party integrations (RepeatMD, TouchMD, JOYA, PatientFi), 2-way texting, CRM integrations, advanced dashboards, employee tracking; 4 GB storage per user, 400 SMS/month, 600 emails/month"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "custom pricing, contact sales; \"Travel costs billed separately\"",
+        "what_it_includes": "Multi-location dashboards, dedicated account manager, onsite setup, train-the-trainer, branded materials, franchise support"
+      }
+    ],
+    "startingPrice": 15,
+    "setupFee": 399,
+    "freeTrial": "yes — \"14 Day Risk-Free Trial\"",
+    "hiddenCosts": "CONFIRMED ONBOARDING FEE: \"$399 Startup & Onboarding Investment\" applies to both Essentials and Accelerator. The $15-$19 headline is PER USER, so a 6-person med spa is $90-$114/mo before add-ons — the sticker price is deceptively low relative to per-location competitors. Every clinically important capability is a separate paid module: Cloud ePrescribing is $31-$40 per prescriber on a 6-month rate and $40-$45 per prescriber annually; ChartSmart AI charting is tiered at $30/mo (50 charts), $50/mo (100 charts), $75/mo (unlimited); LeadAR marketing/lead management is $97/month. Storage is capped per user (2 GB / 4 GB) and SMS/email allotments are small (250 SMS + 300 emails per month on Essentials) — overage pricing is not published. Enterprise onsite setup carries separately-billed travel costs. Payment processing rates are not published on the pricing page.",
+    "processing": null,
+    "hipaa": "Pricing page displays a HIPAA compliance badge linking to the HHS HIPAA reference (https://www.aestheticrecord.com/pricing/). No explicit BAA offer or BAA language appears on the pricing page itself.",
+    "segment": "solo to multi-location medical-clinical med spa; per-user model favors small teams, Enterprise tier covers franchise/multi-site",
+    "clinical": "Yes — genuine clinical/EMR. Procedure charting, photo management with before/after, medical director oversight/sign-off workflow, patient portal, plus optional Cloud ePrescribing on the Surescripts network with drug interaction tracking, RXBC benefits checks, and EPCS for controlled substances.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "user",
+    "entryTier": "Essentials",
+    "entryNote": "per user per month, plus a one-time \"$399 Startup & Onboarding Investment\"",
+    "displayName": "Aesthetic Record",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "vagaro",
+    "name": "Vagaro",
+    "url": "https://www.vagaro.com",
+    "pricingUrl": "https://www.vagaro.com/pro/pricing and https://support.vagaro.com/hc/en-us/articles/22781768988187-Vagaro-Plans-Pricing-and-Premium-Features",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Vagaro subscription (single plan, scales by calendar count)",
+        "monthly_price_usd": 23.99,
+        "billing_note": "US base rate, described as a \"limited time offer\"; additional employee bookable calendars are $10-$15/month each for up to 7 licenses, after which additional employees are free",
+        "what_it_includes": "Core booking, calendar, POS, client management; excludes email marketing, text marketing and branded app"
+      }
+    ],
+    "startingPrice": 23.99,
+    "setupFee": null,
+    "freeTrial": "yes — \"30 days, during which you have access to all Vagaro features except email marketing, text marketing & branded app\"",
+    "hiddenCosts": "The $23.99 headline covers ONE bookable calendar; each additional employee calendar is $10-$15/month up to 7 licenses. The add-on catalog is where the real bill forms: MySite website $20/month (US); Custom Website Design $299 one-time (US); Brand Package $500 one-time (US); Branded App $100/month (US) PLUS a one-time development fee; Forms $10/month; Check-In App $10/month; Connect AI $10/month; Vagaro Drive storage \"Starting at $10/month\"; Vagaro Payroll \"$34/month plus $5/month per employee\" (US only); Data Lake $40/month; APIs/Webhooks \"Starting at $10\". Text messaging runs on a tiered credit system from 1,000 credits/$20/month (US Small) up to 500,000 credits/$2,500/month (US Ultra). Email marketing is free only on the Small plan (1,000 credits); paid tiers run $10-$90/month. Large-merchant payment processing carries an additional $10/month subscription. Cancellation is genuinely free: \"You can cancel your subscription at any time, for any reason—no questions asked, and no fee.\"",
+    "processing": "Tiered by merchant size: Small merchants 2.6%-3.5%, Large merchants 2.29%-3.5%, plus per-transaction fees of $0.10-$0.25; Large Merchant tier adds a $10/month subscription",
+    "hipaa": "Pricing page footer displays a HIPAA Compliance badge (https://www.vagaro.com/pro/pricing). No BAA terms or explicit BAA offer stated on the page.",
+    "segment": "solo to multi-location salon-spa booking; very low entry price, weakest clinical depth of the med-spa-adjacent options",
+    "clinical": "Booking/POS only. Forms are a $10/month add-on. No medical charting, no SOAP notes, no e-prescribing, and no before/after photo module published on vendor pricing pages. Not an EMR.",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "user",
+    "entryTier": "Vagaro subscription (single plan, scales by calendar count)",
+    "entryNote": "US base rate, described as a \"limited time offer\"; additional employee bookable calendars are $10-$15/month each for up to 7 licenses, after which additional employees are free",
+    "displayName": "Vagaro",
+    "promo": true,
+    "annualRequired": false
+  },
+  {
+    "slug": "glossgenius",
+    "name": "GlossGenius",
+    "url": "https://glossgenius.com",
+    "pricingUrl": "https://www.glossgenius.com/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Standard (Beauty & Wellness)",
+        "monthly_price_usd": 28,
+        "billing_note": "$24/mo if billed annually (14% savings)",
+        "what_it_includes": "Core booking, POS, 24/7 online booking, free data transfer, flat 2.6% processing"
+      },
+      {
+        "tier_name": "Gold (Beauty & Wellness)",
+        "monthly_price_usd": 56,
+        "billing_note": "$48/mo if billed annually (14% savings); \"Most popular\"",
+        "what_it_includes": "Everything in Standard plus expanded team and marketing features"
+      },
+      {
+        "tier_name": "Platinum (Beauty & Wellness)",
+        "monthly_price_usd": 168,
+        "billing_note": "$148/mo if billed annually (12% savings)",
+        "what_it_includes": "Full beauty/wellness feature set"
+      },
+      {
+        "tier_name": "Practice Essentials (Medspa & Aesthetics)",
+        "monthly_price_usd": 168,
+        "billing_note": "$148/mo if billed annually (14% savings); \"Most popular\" for medspa",
+        "what_it_includes": "HIPAA compliance, Charting, Photo Markup, Medical director sign-off, 50 GB storage"
+      },
+      {
+        "tier_name": "Practice Advanced (Medspa & Aesthetics)",
+        "monthly_price_usd": 298,
+        "billing_note": "$248/mo if billed annually (12% savings)",
+        "what_it_includes": "Everything in Practice Essentials plus advanced features, 100 GB storage"
+      }
+    ],
+    "startingPrice": 28,
+    "setupFee": 0,
+    "freeTrial": "yes — \"free 14-day trial\", \"No credit card required\"",
+    "hiddenCosts": "The cheap $28/$56 Beauty & Wellness tiers do NOT include HIPAA compliance, charting, or medical director sign-off — a med spa must buy the Practice tiers, so the real entry price is $168/mo ($148 annual), a 6x jump from the advertised headline. Payroll is a separate add-on at \"$40/month + $6/seat\". Instant payouts carry \"an additional 1.8% fee\" on top of processing (free same-day payouts are limited to Monday–Thursday). Storage is capped at 50 GB / 100 GB — a photo-heavy aesthetics practice can hit this. Annual billing is required to get the advertised discount rates. Positives: processing is a flat 2.6% with \"no Tap to Pay, card-on-file, or manual entry fees,\" free data transfer, and no setup fee.",
+    "processing": "Flat 2.6% on all plans, with \"no Tap to Pay, card-on-file, or manual entry fees\"; instant payouts add 1.8%",
+    "hipaa": "Pricing page lists \"HIPAA Compliance\" as an included feature of the Practice (Medspa & Aesthetics) plans only (https://www.glossgenius.com/pricing). BAA availability is not explicitly stated on the page.",
+    "segment": "solo and single-location; salon-spa booking at the low tiers, light medical-clinical at the Practice tiers",
+    "clinical": "Tier-dependent. Beauty & Wellness tiers are booking/POS only. Practice Essentials and Practice Advanced add real clinical basics — Charting, Photo Markup (before/after annotation), and Medical director sign-off. No e-prescribing published; not a full EMR (no labs, no eRx, no insurance billing).",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": "Standard (Beauty & Wellness)",
+    "entryNote": "$24/mo if billed annually (14% savings)",
+    "displayName": "GlossGenius",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "jane",
+    "name": "Jane",
+    "url": "https://jane.app",
+    "pricingUrl": "https://jane.app/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Balance",
+        "monthly_price_usd": 54,
+        "billing_note": "single practitioner, capped at 20 appointments/month",
+        "what_it_includes": "Full core feature set but with a hard monthly appointment cap"
+      },
+      {
+        "tier_name": "Practice",
+        "monthly_price_usd": 79,
+        "billing_note": "includes 1 full-time practitioner; \"$29/month per part-time\" and \"$49/month per full-time\" for additional staff",
+        "what_it_includes": "Unlimited admins & locations, online booking, 1:1 and group appointments, telehealth, secure messaging, intake forms, custom charting templates, outcome surveys, treatment plans, invoicing, superbills/CMS 1500s"
+      },
+      {
+        "tier_name": "Thrive",
+        "monthly_price_usd": 99,
+        "billing_note": "includes 1 full-time practitioner; same per-staff add rates as Practice",
+        "what_it_includes": "Everything in Practice plus expanded functionality"
+      }
+    ],
+    "startingPrice": 54,
+    "setupFee": 0,
+    "freeTrial": "no free trial; demo accounts available. Free Data Import and a Complimentary Account Setup Call are included",
+    "hiddenCosts": "Base price covers only ONE practitioner — the real cost is driven by per-practitioner stacking at \"$49/month per full-time\" and \"$29/month per part-time.\" A 5-provider clinic on Practice is $79 + 4x$49 = $275/mo. The Balance tier's 20-appointments-per-month cap makes it unusable for a working med spa. Paid add-ons: AI Scribe unlimited \"$15/month per opted-in practitioner\" (only 5 free notes in base), Group Telehealth \"$15/month per opted-in practitioner,\" Insurance Billing \"$20/month\" base plus \"$5 / $2.50 per additional full / part-time practitioner,\" and Jane Websites \"$59/month per clinic.\" Verify currency at checkout — Jane operates a USD/CAD toggle and is Canada-headquartered. Genuine positives: unlimited admins and unlimited locations at no extra charge, no setup fee, free data import, and \"Unlimited Human Support\" with no time limits.",
+    "processing": "Online 2.85% + $0.25; in-person 2.6% + $0.10",
+    "hipaa": "Pricing page states HIPAA, PIPEDA, and GDPR compliance across all plans (https://jane.app/pricing). BAA availability is not explicitly stated on the pricing page.",
+    "segment": "solo to multi-location medical-clinical / allied health; unlimited locations included, but priced per practitioner",
+    "clinical": "Yes — genuine clinical/EMR. Custom charting templates, treatment plans, intake forms, outcome surveys, secure messaging, telehealth, superbills/CMS 1500 insurance forms, and an AI Scribe for note generation. No e-prescribing published — this is the notable clinical gap versus med-spa-native EMRs.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": "Balance",
+    "entryNote": "single practitioner, capped at 20 appointments/month",
+    "displayName": "Jane",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "wellnessliving",
+    "name": "WellnessLiving",
+    "url": "https://www.wellnessliving.com",
+    "pricingUrl": "https://www.wellnessliving.com/pricing/",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Starter",
+        "monthly_price_usd": 69,
+        "billing_note": "$62/mo if billed annually (10% savings); one staff member only",
+        "what_it_includes": "Classes & Appointments Booking, Achieve client app, Elevate staff app, POS & credit card processing, email and SMS notifications, one staff member, free data migration"
+      },
+      {
+        "tier_name": "Business",
+        "monthly_price_usd": 199,
+        "billing_note": "regular price $199/mo ($179/mo annual); currently promoted at \"$39/mo*\" with \"*Save 80% for 2 Months\" — the $39 is a 2-month promo, NOT the ongoing rate",
+        "what_it_includes": "Everything in Starter plus unlimited staff, Rewards & Loyalty, Events Scheduling, Email & Text Marketing, Lead Management"
+      },
+      {
+        "tier_name": "BusinessPro",
+        "monthly_price_usd": 349,
+        "billing_note": "regular price $349/mo ($314/mo annual); currently promoted at \"$69/mo*\" with \"*Save 80% for 2 Months\"",
+        "what_it_includes": "Everything in Business plus White Label Achieve client app"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "\"Call us\"",
+        "what_it_includes": "Parent/HQ account, dedicated account manager, enterprise royalties and fees, multi-location reporting, cross-location visits"
+      }
+    ],
+    "startingPrice": 69,
+    "setupFee": 0,
+    "freeTrial": "not stated on the pricing page; \"FREE TRAINING & ONBOARDING\" white-glove onboarding and free data migration are included",
+    "hiddenCosts": "SEVERE PROMO-PRICE TRAP: the eye-catching \"$39/mo\" and \"$69/mo\" figures are marked \"*Save 80% for 2 Months\" — after two months these revert to $199/mo and $349/mo respectively. Any comparison built on the promo numbers is wrong by 5x. Starter allows exactly ONE staff member, so essentially every med spa lands on Business ($199) or higher. Add-ons are separate: API Access $19/mo, White Label Achieve client app, Presence Custom Website, and CAASI AI Front Desk. Messaging is metered — Message Center marketing SMS \"rates vary by country,\" 2-way conversational SMS is \"Pay Per Use,\" and Direct Mail Postcards are \"Pay Per Use,\" none with published rates. Enterprise carries \"Enterprise Royalties and Fees\" — unusual language worth diligence for franchise buyers. Payment processing is referenced only comparatively (\"starting at 2.59%\" in a Mindbody comparison) and is not published as WellnessLiving's own committed rate.",
+    "processing": null,
+    "hipaa": "Pricing page displays a HIPAA compliance badge verified by Compliancy Group (https://www.wellnessliving.com/pricing/). No BAA offer stated on the page.",
+    "segment": "single-location to multi-location salon-spa, fitness and wellness studios; enterprise/franchise tier available",
+    "clinical": "Booking/POS only. No EMR or medical charting features appear on the pricing page — no SOAP notes, no e-prescribing, no before/after photos, no clinical consent forms. Not an EMR.",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": "Starter",
+    "entryNote": "$62/mo if billed annually (10% savings); one staff member only",
+    "displayName": "WellnessLiving",
+    "promo": true,
+    "annualRequired": false
+  },
+  {
+    "slug": "mindbody",
+    "name": "Mindbody",
+    "url": "https://www.mindbodyonline.com",
+    "pricingUrl": "https://www.mindbodyonline.com/business/pricing",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Starter",
+        "monthly_price_usd": 79,
+        "billing_note": "\"Starting at $79 USD/month per location\" — this is a floor price, not a firm rate",
+        "what_it_includes": "Business management tools, integrated payments, branded website booking widgets, listing on the Mindbody app, basic reporting, unlimited users"
+      },
+      {
+        "tier_name": "Accelerate",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind a \"Let's talk\" sales CTA",
+        "what_it_includes": "Everything in Starter plus powerful analytics & reporting, room and resource management, Client Pick-a-Spot, promo codes, access to premium add-ons"
+      },
+      {
+        "tier_name": "Ultimate",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind a \"Let's talk\" sales CTA; marked \"Best Value\"",
+        "what_it_includes": "Everything in Accelerate plus automated email and text campaigns, marketing list growth tools, 24/7 AI front desk support, built-in sales pipeline, next-level analytics"
+      }
+    ],
+    "startingPrice": 79,
+    "setupFee": null,
+    "freeTrial": "not stated on the pricing page; demo/sales contact is the only path",
+    "hiddenCosts": "Only a floor price is published — \"Starting at $79 USD/month per location.\" Accelerate and Ultimate prices are both hidden behind \"Let's talk,\" so two of three tiers are effectively unpriced and the $79 figure should never be presented as a med spa's real cost. The page invites negotiation directly: \"Connect with Sales to learn about available discounts that fit your studio's size and budget,\" which signals rep-discretion pricing and variable outcomes between buyers. Pricing is per location. Payment processing rates, SMS/text fees, setup fees, contract length, and add-on pricing are all undisclosed. Named add-ons with no published price: Branded Mobile App, AI Concierge (included in Ultimate, add-on for Accelerate), Mindbody Integrations, Mindbody Capital, Technical Account Management. Payments are marketed with \"no monthly fees, no minimums\" but no rate is given.",
+    "processing": null,
+    "hipaa": "No HIPAA compliance or BAA statement appears on the Mindbody business pricing page.",
+    "segment": "single-location to multi-location and enterprise salon-spa, fitness and wellness; marketplace-driven acquisition (\"Access to 3M+ monthly shoppers\")",
+    "clinical": "Booking/POS only. No medical charting, SOAP notes, e-prescribing, before/after photos, or clinical consent forms published on the pricing page. Not an EMR.",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "location",
+    "entryTier": "Starter",
+    "entryNote": "\"Starting at $79 USD/month per location\" — this is a floor price, not a firm rate",
+    "displayName": "Mindbody",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "optimantra",
+    "name": "OptiMantra",
+    "url": "https://www.optimantra.com",
+    "pricingUrl": "https://www.optimantra.com/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "OptiMantra Base",
+        "monthly_price_usd": 99,
+        "billing_note": "\"$99/month for first practitioner\"; \"$49/mo per additional practitioner\"; \"$25/mo per clinical staff\"; clerical staff \"Free\"; \"no long-term commitment. 30 day cancellation notice required\"",
+        "what_it_includes": "Online Booking, Customizable Charting, Custom Templates and Questionnaires, HIPAA-compliant telehealth video chat, prescriptions and electronic labs, integrated insurance billing"
+      }
+    ],
+    "startingPrice": 99,
+    "setupFee": null,
+    "freeTrial": "yes — \"Try For Free\"; length not stated on the pricing page",
+    "hiddenCosts": "Priced per person with three different rates: $99 first practitioner, $49/mo each additional practitioner, $25/mo per clinical staff member, clerical staff free. A 4-provider clinic with 2 medical assistants is $99 + 3x$49 + 2x$25 = $296/mo. Communication and clinical add-ons are separate: eRx license with EPCS $38/mo, fax number $25/mo, two-way texting $75/mo, group texting $100/mo, insurance billing $0.25 per claim. Note that texting — which most med spas treat as core — costs more than an extra practitioner seat. Discounts are published and unusually generous: \"50% for Students,\" \"30% for part-time or community clinics,\" \"20% for NPs and PAs,\" though \"practice-wide discounts apply only to full-time Providers and Clinical Support.\" No long-term contract, but 30-day cancellation notice is required. Payment processing rates are not published.",
+    "processing": null,
+    "hipaa": "Pricing page lists \"HIPAA and PHIPA Compliance\" as an included base feature and describes \"Telehealth / Secure, HIPAA-compliant Video Chat\" (https://www.optimantra.com/pricing). No explicit BAA offer stated on the page.",
+    "segment": "solo to single-location medical-clinical; integrative/functional medicine and med spa; insurance-capable",
+    "clinical": "Yes — genuine clinical/EMR, among the most complete at this price point. Customizable charting, custom templates and questionnaires, prescriptions and electronic labs, HIPAA-compliant telehealth, e-prescribing with EPCS for controlled substances (paid add-on), and fully integrated insurance billing.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": "OptiMantra Base",
+    "entryNote": "\"$99/month for first practitioner\"; \"$49/mo per additional practitioner\"; \"$25/mo per clinical staff\"; clerical staff \"Free\"; \"no long-term commitment. 30 day cancellation notice required\"",
+    "displayName": "OptiMantra",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "boulevard",
+    "name": "Boulevard",
+    "url": "https://www.joinblvd.com",
+    "pricingUrl": "https://www.joinblvd.com/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Essentials",
+        "monthly_price_usd": 140,
+        "billing_note": "per location, annual billing; page states \"$140*/mo per location (Normally $176)\" — limited-time summer promo, new customers only",
+        "what_it_includes": "Up to 5 professionals, 100 free texts, 500 free email blasts, 25 GB storage"
+      },
+      {
+        "tier_name": "Premier",
+        "monthly_price_usd": 234,
+        "billing_note": "per location, annual billing; \"$234*/mo per location (Normally $293)\"",
+        "what_it_includes": "Unlimited professionals, 250 free texts, 1,000 free email blasts, 50 GB storage"
+      },
+      {
+        "tier_name": "Prestige",
+        "monthly_price_usd": 328,
+        "billing_note": "per location, annual billing; \"$328*/mo per location (Normally $410)\"",
+        "what_it_includes": "Forms add-on included, 2,500 free texts, 10,000 free email blasts, 100 GB storage"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "custom / consultation required",
+        "what_it_includes": "Bespoke plan"
+      }
+    ],
+    "startingPrice": 140,
+    "setupFee": null,
+    "freeTrial": "not stated on pricing page; demo request is the only CTA",
+    "hiddenCosts": "Advertised prices are BOTH promotional AND annual-billing prices — the non-promo rates are $176 / $293 / $410 per location per month, and a 10% discount is tied to annual billing. Prices are PER LOCATION, so multi-site med spas multiply. Major paid add-ons on top of base: Forms \"Starting $65 per month per location\"; ePrescribe \"$45 per prescriber, unlimited support staff\"; QuickBooks integration \"$45 per month per location\". SMS marketing is metered — \"Pay based on the number of texts you send and receive each month\" with no published per-text rate. Email beyond the free allotment is \"$0.01 per email\". Essentials caps at 5 professionals, so a growing med spa is forced to Premier. Payment processing rates are not published anywhere on the pricing page.",
+    "processing": null,
+    "hipaa": "Pricing page footer badges state \"HIPAA Compliant,\" \"SOC 2 Compliant,\" and \"PCI Level 1 Compliant\" (https://www.joinblvd.com/pricing). No BAA terms or BAA availability stated on the page.",
+    "segment": "single-location to multi-location salon-spa and med spa; leans premium salon/spa with clinical add-ons",
+    "clinical": "Hybrid. Core product is booking/POS/CRM, but genuine clinical capability is available as paid add-ons: ePrescribe with \"EPCS-compliant support for controlled or non-controlled prescriptions\" ($45/prescriber) and Forms/charting (from $65/location). SOAP-note-grade charting and before/after photo tooling are not specified on the pricing page.",
+    "klass": "hybrid",
+    "affiliate": null,
+    "billingBasis": "location",
+    "entryTier": "Essentials",
+    "entryNote": "per location, annual billing; page states \"$140*/mo per location (Normally $176)\" — limited-time summer promo, new customers only",
+    "displayName": "Boulevard",
+    "promo": true,
+    "annualRequired": true
+  },
+  {
+    "slug": "aestheticspro",
+    "name": "AestheticsPro",
+    "url": "https://www.aestheticspro.com",
+    "pricingUrl": "https://www.aestheticspro.com/Software-Pricing/",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Pro-Plus",
+        "monthly_price_usd": 160,
+        "billing_note": "includes up to 3 users; \"$85/mo for additional user\"",
+        "what_it_includes": "Mobile app, client portal with online booking, telemedicine, e-prescribe, AP texting, AP marketing, EMR Form Library with 500+ customizable forms"
+      },
+      {
+        "tier_name": "Executive",
+        "monthly_price_usd": 285,
+        "billing_note": "unlimited users",
+        "what_it_includes": "Everything in Pro-Plus plus unlimited users/roles, multi-location support, advanced integrations, live support, dedicated webinars"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": 350,
+        "billing_note": "unlimited users",
+        "what_it_includes": "Everything in Executive plus custom API solutions, dedicated live support, custom comprehensive reporting"
+      }
+    ],
+    "startingPrice": 160,
+    "setupFee": null,
+    "freeTrial": "not stated on the pricing page",
+    "hiddenCosts": "The single biggest cost escalator is the per-user charge on the entry plan: Pro-Plus covers only 3 users and each additional user is \"$85/mo\" — a 6-user med spa on Pro-Plus costs $415/mo, which is more than the unlimited-user Executive plan at $285/mo. Multi-location support requires Executive or above. Annual prepay savings are referenced but the discount percentage is not published. NOTE ON SETUP FEES: this vendor is widely reported to charge an onboarding/training fee, but NO setup, implementation, or training fee is disclosed anywhere on the vendor's own pricing page — treat any setup-fee figure as unverified until confirmed by the vendor in writing. SMS rates, payment processing rates, and add-on module pricing are also not disclosed on the pricing page.",
+    "processing": null,
+    "hipaa": "Pricing page describes the platform as \"HIPAA compliant\" and markets \"HIPAA-Compliant Virtual Consultations\" for telemedicine; PCI compliance also claimed (https://www.aestheticspro.com/Software-Pricing/). No explicit BAA offer stated on the page.",
+    "segment": "single-location to multi-location medical-clinical med spa; purpose-built for medical aesthetics rather than salon booking",
+    "clinical": "Yes — genuine clinical/EMR. E-prescribe (\"Script Transmission,\" \"cloud-based & HIPAA compliant,\" works across any device), E-Records Management & Form Creator with an \"EMR Form Library with 500+ Customizable Forms\" (consent forms), AP Photo before/after comparison with \"alignment guides and ghosting features,\" and SOAP-style treatment-plan documentation via ERecord Draw.",
+    "klass": "emr",
+    "affiliate": "https://www.aestheticspro.com/Referral-Program/",
+    "billingBasis": "flat",
+    "entryTier": "Pro-Plus",
+    "entryNote": "includes up to 3 users; \"$85/mo for additional user\"",
+    "displayName": "AestheticsPro",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "mangomint",
+    "name": "Mangomint",
+    "url": "https://www.mangomint.com",
+    "pricingUrl": "https://www.mangomint.com/pricing/",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Essentials",
+        "monthly_price_usd": 165,
+        "billing_note": "flat per location; 2 to 10 service providers",
+        "what_it_includes": "Core booking, POS, unlimited SMS & email appointment notifications"
+      },
+      {
+        "tier_name": "Standard",
+        "monthly_price_usd": 245,
+        "billing_note": "flat per location; up to 20 service providers",
+        "what_it_includes": "Express Booking, Virtual Waiting Room, Memberships, standard integrations, 1 card reader included"
+      },
+      {
+        "tier_name": "Unlimited",
+        "monthly_price_usd": 375,
+        "billing_note": "flat per location; unlimited service providers",
+        "what_it_includes": "All advanced features, Shopify and other integrations included"
+      }
+    ],
+    "startingPrice": 165,
+    "setupFee": 0,
+    "freeTrial": "yes — free trial account with demo data; length not stated on pricing page",
+    "hiddenCosts": "Base price excludes the two modules a med spa actually needs. Forms & Charting is a $50/month add-on (+$25 per additional location) — this is the ONLY way to get clinical charting, so the real med spa entry price is $215/mo, not $165. Connect (call/text/chat) is $75/month (+$25/location). Payroll is $50/month + $8 per worker. Shopify integration $50/month on Standard (free on Unlimited). Additional locations cost $95 / $135 / $175 per month by tier. Marketing email and text are metered: \"Pay as you go (1¢ per marketing credit),\" with subscription bundles starting at $50/month. Extra Bluetooth card readers are $100/device. CRITICAL HIPAA GOTCHA: the Essentials tier does NOT include HIPAA compliance — BAA is available only on Standard and Unlimited, so a HIPAA-covered med spa cannot legally sit on the $165 plan. Offsetting positives, explicitly stated: no setup fees, no contracts, cancel anytime, free one-on-one onboarding, free standard data import.",
+    "processing": "In-person 2.45% + 15¢; virtual/online 2.90% + 30¢; custom rates available above $50k/month volume",
+    "hipaa": "Pricing page states BAA available \"upon request\" on Standard and Unlimited tiers; Essentials does not include HIPAA compliance (https://www.mangomint.com/pricing/)",
+    "segment": "single-location to small multi-location salon-spa and med spa; strongest fit 2-20 providers",
+    "clinical": "Booking/POS core. Charting exists only via the paid Forms & Charting add-on ($50/mo). No e-prescribing published. Not a full EMR — no SOAP-grade clinical documentation, labs, or eRx advertised.",
+    "klass": "hybrid",
+    "affiliate": null,
+    "billingBasis": "location",
+    "entryTier": "Essentials",
+    "entryNote": "flat per location; 2 to 10 service providers",
+    "displayName": "Mangomint",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "meevo",
+    "name": "Meevo (Millennium Systems International)",
+    "url": "https://www.meevo.com",
+    "pricingUrl": "https://www.meevo.com/pricing",
+    "pricingPublic": true,
+    "tiers": [
+      {
+        "tier_name": "Salon & Spa — Lite",
+        "monthly_price_usd": 129,
+        "billing_note": "promotional; regular price $179/mo; annual contract required",
+        "what_it_includes": "5 users, 2,500 email contacts, 100 SMS credits, unlimited transactional SMS"
+      },
+      {
+        "tier_name": "Salon & Spa — Essentials",
+        "monthly_price_usd": 229,
+        "billing_note": "promotional; regular price $299/mo; annual contract required",
+        "what_it_includes": "Unlimited users, 5,000 email contacts, 500 SMS credits"
+      },
+      {
+        "tier_name": "Salon & Spa — Premier",
+        "monthly_price_usd": 329,
+        "billing_note": "promotional; regular price $449/mo; annual contract required",
+        "what_it_includes": "Unlimited users, 10,000 email contacts, 2,500 SMS credits"
+      },
+      {
+        "tier_name": "Med Spa — Lite",
+        "monthly_price_usd": 229,
+        "billing_note": "promotional; regular price $299/mo; annual contract required",
+        "what_it_includes": "5 users, 2,500 email contacts, 100 SMS credits, plus Charting & Annotation, Injectable Tracking, Client Intake Forms"
+      },
+      {
+        "tier_name": "Med Spa — Essentials",
+        "monthly_price_usd": 329,
+        "billing_note": "promotional; regular price $399/mo; annual contract required",
+        "what_it_includes": "Unlimited users, 5,000 email contacts, 500 SMS credits, plus med spa clinical features"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote required",
+        "what_it_includes": "Custom"
+      }
+    ],
+    "startingPrice": 229,
+    "setupFee": 0,
+    "freeTrial": "not offered / not stated; \"Unlimited Implementation & Training\" is included",
+    "hiddenCosts": "ANNUAL CONTRACT IS MANDATORY — \"Meevo subscriptions are based on an annual contract.\" Cancellation requires 30-day notice on monthly plans and notice \"by the 11th month\" on annual plans, so a missed notice window auto-renews you for another year. All displayed prices are promotional; the regular rates are materially higher ($179 / $299 / $449 salon; $299 / $399 med spa). Med Spa tiers cost $100 more per month than the equivalent Salon & Spa tier for the same user counts — the clinical features carry a hard premium. Lite tiers cap at 5 users. SMS credits are small (100-2,500/month) and marketing email contact counts are capped; overage rates are not published. Payment processing rates are not disclosed. Positive: \"Unlimited Implementation & Training\" is included at no charge.",
+    "processing": null,
+    "hipaa": "Pricing page footer states \"A 100% HIPAA-Compliant Platform\" (https://www.meevo.com/pricing). No BAA offer stated on the page.",
+    "segment": "single-location to multi-location salon-spa, with a distinctly priced med spa product line; enterprise/franchise tier available",
+    "clinical": "Tier-dependent. Salon & Spa plans are booking/POS. Med Spa plans add real clinical basics — \"Charting & Annotation,\" \"Injectable Tracking,\" and \"Client Intake Forms.\" No e-prescribing, labs, or SOAP-note EMR published. Lighter clinically than AestheticsPro, Aesthetic Record, or PatientNow.",
+    "klass": "hybrid",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": "Med Spa — Lite",
+    "entryNote": "promotional; regular price $299/mo; annual contract required",
+    "displayName": "Meevo",
+    "promo": true,
+    "annualRequired": true
+  },
+  {
+    "slug": "phorest",
+    "name": "Phorest",
+    "url": "https://www.phorest.com",
+    "pricingUrl": "https://www.phorest.com/us/pricing/",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Starter",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote only; \"Great for salons & medspas with 3+ staff\"",
+        "what_it_includes": "Core platform, unlimited devices, unlimited staff, 1,000 free SMS/month then 5c per SMS"
+      },
+      {
+        "tier_name": "Grow",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote only; marked \"Most Popular Plan\"",
+        "what_it_includes": "5,000 free SMS/month, loyalty programs and additional growth features"
+      },
+      {
+        "tier_name": "Complete Advantage",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote only; \"Great for larger salons & medspas\"",
+        "what_it_includes": "Expanded feature set"
+      },
+      {
+        "tier_name": "Elite",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote only; \"Most inclusive plan\"",
+        "what_it_includes": "27,000 free SMS/month, branded app, 2-way SMS, full feature set"
+      },
+      {
+        "tier_name": "Core Aesthetics (MedSpa)",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote only",
+        "what_it_includes": "\"Essential features to optimize your Med Spa operations\""
+      },
+      {
+        "tier_name": "Elevate Aesthetics (MedSpa)",
+        "monthly_price_usd": null,
+        "billing_note": "custom quote only",
+        "what_it_includes": "\"Accelerate growth and enhance profitability in your Med Spa\""
+      }
+    ],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "no — \"We don't offer a free trial,\" full demos provided instead",
+    "hiddenCosts": "No monthly prices are published for ANY tier, including the two dedicated MedSpa plans — every tier routes to a quote. The only published rates are SMS: 5c per SMS on Starter after 1,000 free/month, with free allotments rising to 5,000/month (Grow) and 27,000/month (Elite); Phorest Chat \"Includes 7,500 SMS for $99.\" Because SMS allowance is the main visible tier differentiator, a high-volume med spa may be pushed up-tier by messaging costs rather than features. Onboarding is included — \"All of our plans include bespoke set up of the software for YOUR salon\" with \"Client info, service and product import/migration\" and \"Installation & tailored set up.\" Unlimited devices and unlimited staff are included at all tiers, which is a genuine cost advantage versus per-seat vendors. Payment processing rates, contract length, and setup fees are undisclosed.",
+    "processing": null,
+    "hipaa": "No HIPAA compliance, BAA, EMR or medical charting language appears on the Phorest US pricing page, despite the page explicitly marketing MedSpa plans. This is a notable gap for a clinical buyer.",
+    "segment": "single-location to multi-location salon-spa with med spa plans layered on; salon-first heritage",
+    "clinical": "Not verifiable from the pricing page. No medical charting, SOAP notes, e-prescribing, before/after photos, or consent form features are described, even on the dedicated MedSpa tiers. Treat as booking/POS unless the vendor demonstrates otherwise.",
+    "klass": "unclear",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Phorest",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "booker",
+    "name": "Booker (by Mindbody)",
+    "url": "https://www.booker.com",
+    "pricingUrl": "https://www.booker.com/pricing",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Starter",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind \"Let's talk\"; page states only \"Starting at $139\" for the product overall",
+        "what_it_includes": "\"Get the essential tools you need to run and manage your business\""
+      },
+      {
+        "tier_name": "Accelerate",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind \"Let's talk\"; marked \"Best Value\"",
+        "what_it_includes": "Email campaigns and contact lists"
+      },
+      {
+        "tier_name": "Ultimate",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind \"Let's talk\"",
+        "what_it_includes": "\"Automate your email & text marketing\""
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "custom pricing for multi-location businesses",
+        "what_it_includes": "Custom"
+      }
+    ],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "not mentioned on the pricing page",
+    "hiddenCosts": "Only a single floor figure is published — \"Starting at $139\" — with no individual tier prices; all three named tiers route to \"Let's talk\" contact forms. Messenger AI is an extra-cost add-on on both Starter and Accelerate. The page carries an important caveat: \"Not all features are available in all regions or on all tiers,\" meaning a feature seen in a demo may not be included in the tier quoted. Setup fees, free trial, contract length, payment processing rates and SMS rates are all undisclosed. Positive: \"Booker provides unlimited technical support for the life of your subscription, and you can access online support 24/7.\"",
+    "processing": null,
+    "hipaa": "No HIPAA compliance or BAA statement appears on the Booker pricing page. Booker targets salons, spas and barbershops rather than healthcare providers.",
+    "segment": "single-location to multi-location salon-spa booking; enterprise tier for multi-location",
+    "clinical": "Booking/POS only. No medical charting, SOAP notes, e-prescribing, before/after photos, or clinical consent forms. Not an EMR.",
+    "klass": "booking",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Booker",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "zenoti",
+    "name": "Zenoti",
+    "url": "https://www.zenoti.com",
+    "pricingUrl": "https://www.zenoti.com/pricing",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Zenoti OS",
+        "monthly_price_usd": null,
+        "billing_note": "no price published; \"Multi-location pricing is customized based on your footprint and needs\"",
+        "what_it_includes": "Booking, POS, payroll, and marketing"
+      },
+      {
+        "tier_name": "AI Plus package",
+        "monthly_price_usd": null,
+        "billing_note": "no price published; required for AI features — \"You must be on our AI Plus package to leverage our AI Agents\"",
+        "what_it_includes": "AI agents, customizable add-ons, dedicated Customer Success Manager"
+      }
+    ],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "demo-only — \"Book a personalized demo\" is the sole CTA; no trial offered",
+    "hiddenCosts": "Zero pricing is published. Two structural cost risks are disclosed in the vendor's own language: (1) AI features are paywalled into a higher package — \"You must be on our AI Plus package to leverage our AI Agents,\" so AI capabilities shown in a demo may require a tier upgrade; (2) communications are metered — \"Usage is billed based on consumption with optional base packs,\" meaning SMS/email costs are variable and uncapped unless you buy packs. Pricing is explicitly footprint-based: \"Multi-location pricing is customized based on your footprint and needs,\" so quotes will differ materially between buyers of similar size. Onboarding is stated as included: \"structured onboarding, staff training, and business setup guidance.\" Setup fees, contract length, and payment processing rates are all undisclosed.",
+    "processing": null,
+    "hipaa": "Not publicly stated. Neither the pricing page (https://www.zenoti.com/pricing) nor the security page (https://www.zenoti.com/security) contains any HIPAA compliance claim or BAA offer — the security page covers encryption, threat detection, vulnerability management and incident response only. Buyers requiring a BAA must request it from sales.",
+    "segment": "multi-location and enterprise salon-spa and med spa chains; footprint-based pricing signals an enterprise-first motion",
+    "clinical": "Not verifiable from the pricing page. Medical service types (injectables, skin treatments, medical weight loss) are listed as supported categories, but no charting, SOAP notes, e-prescribing, before/after photo, or consent form functionality is described and no regulatory compliance detail is given.",
+    "klass": "unclear",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Zenoti",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "patientnow",
+    "name": "PatientNow",
+    "url": "https://www.patientnow.com",
+    "pricingUrl": "https://www.patientnow.com/pricing/",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Essentials",
+        "monthly_price_usd": null,
+        "billing_note": "quote-based; \"for aesthetic and cash-pay practices\"",
+        "what_it_includes": "Core intake, records and reporting for cash-pay aesthetic practices"
+      },
+      {
+        "tier_name": "Pro",
+        "monthly_price_usd": null,
+        "billing_note": "quote-based; \"for medical practices that need full EMR, labs, and insurance\"",
+        "what_it_includes": "Full EMR, labs, and insurance billing"
+      }
+    ],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "demo-only; no trial offered",
+    "hiddenCosts": "No prices published — \"Tell us about yours and we'll put together a quote that fits, no obligation,\" a fully custom-quote model. The vendor does claim favorable commercial terms: \"no contract, free onboarding and speedy setup,\" which is worth holding them to in writing since it contradicts the industry norm of annual contracts plus implementation fees. e-Prescribing (eRx) is explicitly an OPTIONAL ADD-ON, not included — a material hidden cost for an injectables practice, with no price disclosed. The Essentials/Pro split means labs and insurance billing are gated to the higher tier. Payment processing rates, SMS rates, add-on pricing, and setup fees are all undisclosed.",
+    "processing": null,
+    "hipaa": "Not stated on the pricing page. No HIPAA compliance claim, BAA offer, or consent-form language appears at https://www.patientnow.com/pricing/ — surprising for a product marketed as a medical EMR, and worth verifying directly with the vendor before publishing.",
+    "segment": "single-location to multi-location medical-clinical aesthetics; Essentials for cash-pay med spas, Pro for insurance-billing medical practices",
+    "clinical": "Yes — genuine clinical/EMR, one of the more clinically complete options. Electronic Medical Records with \"Compliant, fast charting,\" \"AI-generated SOAP notes built into PatientNow,\" e-Prescribing (paid add-on), clinical before & after gallery via the RxPhoto platform, and labs plus insurance billing on the Pro tier.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "PatientNow",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "symplast",
+    "name": "Symplast",
+    "url": "https://symplast.com",
+    "pricingUrl": "https://symplast.com/ (no pricing page exists on the vendor site)",
+    "pricingPublic": false,
+    "tiers": [],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "demo-only — \"Schedule a 30-minute demo by using the button below and a dedicated growth consultant will reach out within 24 hours\"",
+    "hiddenCosts": "NO PRICING PAGE EXISTS on the vendor's own site — https://www.symplast.com/pricing returns a 404 and no pricing is published anywhere on symplast.com. Pricing is available only via a 30-minute demo with a \"growth consultant\" (sales line 844-796-7527, hello@symplast.com). Notably, Symplast publishes multiple \"How [module] can save you up to $X a month\" marketing pages (Payments up to $2,700/mo, Patient App up to $1,200/mo, IT Services up to $200/mo, Secure Messaging up to $100/mo), which indicates a modular product where Payments, Patient App, Secure Messaging and IT Services are separately positioned components — a strong signal of module-based pricing, though no module prices are published. Setup fees, contract length, payment processing rates and trial terms are all undisclosed.",
+    "processing": null,
+    "hipaa": "Not stated on the homepage. No HIPAA compliance claim or BAA language appears on https://symplast.com/, though the product is marketed as \"The #1 KLAS-rated EHR for plastic surgery and aesthetic medicine.\" Request the BAA directly.",
+    "segment": "single-location to multi-location medical-clinical; plastic surgery and aesthetic medicine practices rather than salon-spa",
+    "clinical": "Positioned as a full EHR — \"The #1 KLAS-rated EHR for plastic surgery and aesthetic medicine,\" mobile-first and cloud-based with integrated CRM, records, scheduling, marketing and analytics. However, specific clinical capabilities (SOAP notes, e-prescribing, before/after photo tooling, consent forms) are NOT itemized on the vendor's public pages and could not be verified.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Symplast",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "nextech",
+    "name": "Nextech",
+    "url": "https://www.nextech.com",
+    "pricingUrl": "https://www.nextech.com/plastic-surgery/practice-management-software (no pricing page exists on the vendor site)",
+    "pricingPublic": false,
+    "tiers": [],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "demo-only — the page is demo-focused with \"Schedule a Demo\" appearing repeatedly and no self-service purchase path",
+    "hiddenCosts": "NO PRICING PAGE EXISTS — https://www.nextech.com/pricing returns a 404, and no monthly cost, per-provider fee, or implementation fee is published anywhere on the vendor's public product pages. All pricing requires contacting sales (800.868.3694). Nextech is an enterprise specialty-EHR vendor, a category where implementation and data-migration fees are typically substantial and separately quoted — budget for them, but note that no figure is confirmable from vendor sources. Add-on pricing, contract length, and payment processing rates are all undisclosed.",
+    "processing": null,
+    "hipaa": "Not stated on the reviewed product page. No HIPAA compliance or BAA language appears at https://www.nextech.com/plastic-surgery/practice-management-software; the footer links to a Privacy Policy and CCPA disclosures only.",
+    "segment": "multi-location and enterprise medical-clinical; specialty physician practices (plastic surgery, dermatology, ophthalmology) rather than salon-spa",
+    "clinical": "Positioned as a full specialty EHR + practice management suite with \"Seamless EHR integration\" and \"Codes documented in our fully integrated EHR,\" plus patient demographics, insurance and account history. However, SOAP notes, e-prescribing, before/after photos and consent forms are NOT specified on the reviewed page and could not be verified from vendor sources.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Nextech",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "remedly",
+    "name": "Remedly",
+    "url": "https://www.remedly.com",
+    "pricingUrl": "https://www.remedly.com/faq-page/ (no pricing page exists on the vendor site)",
+    "pricingPublic": false,
+    "tiers": [],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "not stated; contact sales (sales@remedly.com, 415-237-3970)",
+    "hiddenCosts": "NO PRICING PAGE EXISTS — https://www.remedly.com/pricing returns a 404, and the vendor's own FAQ page contains no monthly cost, per-user fee, setup charge, contract length, or trial information. The FAQ does confirm that \"e-prescribing, eLabs, and eFax\" are described as ADDITIONAL INTEGRATIONS rather than included core features, which points to module-based add-on costs on top of any base subscription — but no prices are published for them. Payment processing rates are undisclosed.",
+    "processing": null,
+    "hipaa": "Stated only in general terms. The FAQ says the platform is \"evolving to meet various needs and industry requirements, including HIPAA compliance\" and references a \"HIPAA-compliant\" patient portal (https://www.remedly.com/faq-page/). No BAA statement is provided — this hedged phrasing is weaker than a direct compliance claim and should be verified before relying on it.",
+    "segment": "single-location to multi-location medical-clinical; cloud EHR/EMR spanning aesthetics and behavioral health",
+    "clinical": "Partially verified clinical/EMR. E-prescribing, eLabs and eFax are confirmed but only as additional integrations. Customizable templates are referenced generally. SOAP notes and before/after photo management are NOT mentioned anywhere on the vendor's public pages and could not be verified.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Remedly",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "repeatmd",
+    "name": "RepeatMD",
+    "url": "https://www.repeatmd.com",
+    "pricingUrl": "https://www.repeatmd.com/pricing",
+    "pricingPublic": false,
+    "tiers": [],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "demo-only — \"Book a Demo\" is the only path to pricing",
+    "hiddenCosts": "The pricing page contains NO prices, tiers, or costs whatsoever — it exists purely as a demo capture form. Contract length, setup fees, and any revenue-share or transaction take rate are all undisclosed, which matters because this is a commerce/loyalty product where transaction economics are the core commercial term. IMPORTANT CATEGORY CORRECTION FOR BUYERS: RepeatMD is NOT practice management software and NOT an EMR — it is a branded patient loyalty and ecommerce app (memberships, product sales, treatment promotions, AI treatment advisors), sold as an ADDITIONAL system alongside your PM/EMR, not a replacement. Its own FAQ lists \"Do you integrate with my EMR?\" confirming it presumes a separate EMR. Patient financing is offered via Affirm at \"0-36% APR\" — a cost borne by the patient, not the practice. Branded app launch is promised in \"30 days or less.\"",
+    "processing": null,
+    "hipaa": "Not stated. No HIPAA compliance or BAA language appears on https://www.repeatmd.com/pricing — a meaningful gap for a product that handles patient membership and treatment purchase data.",
+    "segment": "single-location to multi-location med spa and aesthetics practices; add-on revenue layer rather than a core system",
+    "clinical": "None. Not an EMR and not practice management. No charting, SOAP notes, e-prescribing, before/after photos, or consent forms. This is a patient loyalty/ecommerce app that sits alongside your clinical system — \"Your app handles the selling while you focus on your patients.\"",
+    "klass": "adjacent",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "RepeatMD",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "moxie",
+    "name": "Moxie",
+    "url": "https://www.joinmoxie.com",
+    "pricingUrl": "https://www.joinmoxie.com/how-we-work (no dedicated pricing page exists)",
+    "pricingPublic": false,
+    "tiers": [],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "no — consultation call required; \"Schedule a call to learn more\"",
+    "hiddenCosts": "MOST UNUSUAL COMMERCIAL MODEL IN THIS SET — there is no subscription price at all. Vendor's own words: \"With no fixed monthly fees, we only succeed when you succeed. Our performance-based pricing means we are directly incentivized to ensure your practice's revenue is consistently growing.\" That is a REVENUE SHARE, and the percentage is not disclosed anywhere publicly — a percentage of revenue can vastly exceed any competitor's flat fee as a practice scales, so the take rate is the single most important number to extract before signing. https://www.joinmoxie.com/pricing returns a 404. IMPORTANT CATEGORY NOTE: Moxie is NOT software-only. It is a med spa launch-and-operate service bundling the software platform with personalized coaching, medical director matching, legal templates, insurance guidance, done-for-you Instagram/Facebook marketing, and monthly 1:1 business coaching. It is therefore not directly price-comparable to a Boulevard or Mangomint subscription. Eligibility is restricted: limited to an \"ambitious NP, RN, PA, DO, or MD with hands-on injectables experience.\" Medical director costs, contract length, and payment processing rates are undisclosed.",
+    "processing": null,
+    "hipaa": "Site displays an explicit HIPAA compliance badge and states the platform helps you \"Stay compliant with charting, GFEs, automated compliance alerts, and more\" (https://www.joinmoxie.com/how-we-work). No BAA offer stated publicly.",
+    "segment": "solo and first-time med spa founders (injector-owners launching a new practice); medical-clinical, not salon-spa",
+    "clinical": "Yes — clinical features present. Charting, GFEs (Good Faith Exams), automated compliance alerts, and E-Prescribe are named as platform features. Depth of charting (SOAP-note grade), before/after photo tooling, and consent form libraries are not detailed publicly.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Moxie",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "weave",
+    "name": "Weave",
+    "url": "https://www.getweave.com",
+    "pricingUrl": "https://www.getweave.com/pricing/",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Pro",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind \"Get Pricing\"; page states only \"starting from $199 per month\" for the product overall",
+        "what_it_includes": "\"Upgraded suite of solutions\""
+      },
+      {
+        "tier_name": "Elite",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind \"Get Pricing\"; labeled \"Most Popular\"",
+        "what_it_includes": "\"Comprehensive products and features\""
+      },
+      {
+        "tier_name": "Ultimate",
+        "monthly_price_usd": null,
+        "billing_note": "price hidden behind \"Get Pricing\"",
+        "what_it_includes": "\"Most advanced suite\" with \"up to 15 phones, 1:1 personalized training, and premium analytics\""
+      }
+    ],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "not disclosed; demo/sales contact required (888-579-5668)",
+    "hiddenCosts": "Only a floor figure is published — \"simple plans and pricing, starting from $199 per month\" — with all three tier prices hidden behind \"Get Pricing\" buttons. Critically, Weave is a VoIP phone and patient-communication platform, so PHONE HARDWARE is a real cost that is not priced anywhere: the Ultimate tier is described in terms of \"up to 15 phones,\" implying handset counts drive both tier and hardware spend. Per-location and per-line billing structure, hardware fees, onboarding fees, and contract length are all undisclosed — Weave is commonly sold on multi-year agreements, so contract term should be confirmed in writing. Payment processing rates for Weave Payments are not published. Onboarding and support are stated as included: \"Award-winning customer support\" and \"Expert onboarding\" in all plans, with \"Quarterly one-on-one Training\" on Ultimate. CATEGORY NOTE: this is NOT practice management software — it layers phones, texting, reviews and payments on top of whatever PM/EMR you already run.",
+    "processing": null,
+    "hipaa": "Not stated on the pricing page. No HIPAA compliance claim or BAA language appears at https://www.getweave.com/pricing/, despite the product being sold to medical, dental and mental health practices. Request the BAA directly.",
+    "segment": "single-location to multi-location medical-clinical practices; a communications layer, not a core system",
+    "clinical": "None. Not an EMR and not practice management — no charting, SOAP notes, e-prescribing, before/after photos, or consent forms. Weave provides phones, two-way texting, reviews, scheduling reminders and payments alongside an existing clinical system.",
+    "klass": "adjacent",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Weave",
+    "promo": false,
+    "annualRequired": false
+  },
+  {
+    "slug": "pabau",
+    "name": "Pabau",
+    "url": "https://pabau.com",
+    "pricingUrl": "https://pabau.com/pricing/",
+    "pricingPublic": false,
+    "tiers": [
+      {
+        "tier_name": "Starter",
+        "monthly_price_usd": null,
+        "billing_note": "USD price NOT displayed — page renders \"£ 50 /Month\" (GBP) for 1 user, up to 100 clients. A currency selector for US/CA/AU/EU exists but no USD figure was rendered. Do not convert GBP to USD — vendors price regionally, not by exchange rate.",
+        "what_it_includes": "1 user, up to 100 clients, full platform access"
+      },
+      {
+        "tier_name": "Solo",
+        "monthly_price_usd": null,
+        "billing_note": "no price displayed; 1 user, unlimited patients; demo required",
+        "what_it_includes": "Full platform access"
+      },
+      {
+        "tier_name": "Team",
+        "monthly_price_usd": null,
+        "billing_note": "no price displayed; 2-3 users, unlimited patients; demo required",
+        "what_it_includes": "Full platform access"
+      },
+      {
+        "tier_name": "Medium",
+        "monthly_price_usd": null,
+        "billing_note": "no price displayed; 4-5 users, unlimited patients; demo required",
+        "what_it_includes": "Full platform access"
+      },
+      {
+        "tier_name": "Group",
+        "monthly_price_usd": null,
+        "billing_note": "no price displayed; 6-15 users, unlimited patients; demo required",
+        "what_it_includes": "Full platform access"
+      },
+      {
+        "tier_name": "Enterprise",
+        "monthly_price_usd": null,
+        "billing_note": "no price displayed; 16+ users, multi-location supported; demo required",
+        "what_it_includes": "Full platform access"
+      }
+    ],
+    "startingPrice": null,
+    "setupFee": null,
+    "freeTrial": "not stated on the pricing page; demo booking is the CTA",
+    "hiddenCosts": "Only the smallest tier (Starter) shows a price, and only in GBP — every other tier requires a demo, so US pricing is effectively unpublished. Tiers are gated by USER COUNT, not features: \"Every plan includes full access to the Pabau platform\" with no feature gating, so cost scales purely with headcount (1 / 1 / 2-3 / 4-5 / 6-15 / 16+ users). Starter additionally caps at 100 clients, which a working med spa will exhaust quickly, forcing an upgrade. Three paid add-on modules exist with NO published pricing — Marketing Plus, Care Plus, and Insight Plus. Care Plus is the one that matters clinically: it gates Cases/Case types, \"High quality photos,\" advanced clinical tools, and video aftercare behind an extra fee, so the best photo quality in a photo-driven specialty is an upcharge. Annual billing saves \"up to 20%\" (a 10% figure is also shown against Starter). Vendor states \"No commitment.\" Payment processing rates and SMS fees are undisclosed.",
+    "processing": null,
+    "hipaa": "Pricing page lists \"HIPAA compliant\" among included platform features (https://pabau.com/pricing/). No explicit BAA offer stated on the page.",
+    "segment": "solo to multi-location medical-clinical; clinic/aesthetics-native with strong medical depth, UK-origin with US operations",
+    "clinical": "Yes — genuine clinical/EMR, among the deepest in this set. Included in all plans: Drugs/prescription management, medical conditions, diagnostic & billing codes, vaccines, medical data report, Letters (dictation/correspondence), Labs with Lab Insights, unlimited video consultations, before and after photos with photo comparison, and paperless forms. Care Plus add-on extends this with Cases/Case types, high quality photos, and video aftercare.",
+    "klass": "emr",
+    "affiliate": null,
+    "billingBasis": "flat",
+    "entryTier": null,
+    "entryNote": null,
+    "displayName": "Pabau",
+    "promo": false,
+    "annualRequired": false
+  }
+]

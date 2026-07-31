@@ -1,0 +1,120 @@
+---
+const { title, description, noindex } = Astro.props;
+const nav = [
+  ['/pricing/', 'Pricing database'],
+  ['/emr-vs-booking/', 'EMR vs booking'],
+  ['/cost-calculator/', 'Cost calculator'],
+  ['/software/', 'All software'],
+  ['/methodology/', 'Methodology'],
+];
+const year = 2026;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex" />}
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<style is:global>
+:root{
+  --ink:#15171a; --body:#3d4248; --muted:#6b7280; --line:#e4e7ea;
+  --bg:#fff; --soft:#f7f8f9; --accent:#1c5d55; --accent-soft:#e8f1ef;
+  --warn:#8a5a00; --warn-soft:#fdf5e3;
+  --max:940px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--body);
+  font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-feature-settings:"kern","liga";
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+a{color:var(--accent);text-underline-offset:2px}
+a:hover{color:#123f39}
+h1,h2,h3,h4{color:var(--ink);line-height:1.25;margin:2.2rem 0 .7rem;font-weight:650;letter-spacing:-.011em}
+h1{font-size:2.05rem;margin-top:.4rem;letter-spacing:-.021em}
+h2{font-size:1.4rem;padding-top:.6rem}
+h3{font-size:1.1rem}
+p{margin:0 0 1rem}
+hr{border:0;border-top:1px solid var(--line);margin:2.4rem 0}
+small{font-size:.85rem}
+
+header.site{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;gap:1.4rem;height:60px;flex-wrap:wrap}
+.brand{font-weight:700;color:var(--ink);text-decoration:none;font-size:1.06rem;letter-spacing:-.02em;white-space:nowrap}
+.brand span{color:var(--accent)}
+header.site nav{display:flex;gap:1.1rem;flex-wrap:wrap;font-size:.875rem}
+header.site nav a{color:var(--body);text-decoration:none}
+header.site nav a:hover{color:var(--accent)}
+
+.lede{font-size:1.115rem;color:#4a5057;margin-bottom:1.5rem}
+.eyebrow{font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.5rem}
+
+.note{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:.9rem 1.05rem;font-size:.9rem;margin:1.4rem 0}
+.note.warn{background:var(--warn-soft);border-color:#f0dfb8;color:#5c421a}
+.note.accent{background:var(--accent-soft);border-color:#cbe0dc}
+.note p:last-child{margin-bottom:0}
+.stamp{font-size:.8rem;color:var(--muted)}
+
+table{width:100%;border-collapse:collapse;font-size:.885rem;margin:1.2rem 0}
+th,td{text-align:left;padding:.6rem .65rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:640;color:var(--ink);background:var(--soft);white-space:nowrap;font-size:.8rem;letter-spacing:.01em}
+td.num{white-space:nowrap;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+.tag{display:inline-block;font-size:.7rem;font-weight:650;padding:.16rem .45rem;border-radius:4px;letter-spacing:.02em;white-space:nowrap}
+.tag.emr{background:#e7f0fb;color:#1b4d80}
+.tag.booking{background:#fdf0e7;color:#8a4b1d}
+.tag.hybrid{background:#ece8fa;color:#4b3b8f}
+.tag.adjacent{background:#eef0f2;color:#4b5259}
+.tag.unclear{background:#f2f2f2;color:#666}
+
+.cards{display:grid;gap:.85rem;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));margin:1.3rem 0}
+.card{border:1px solid var(--line);border-radius:9px;padding:.95rem 1.05rem;text-decoration:none;color:inherit;display:block;background:#fff}
+.card:hover{border-color:#c3ccd2;background:var(--soft)}
+.card .n{font-weight:640;color:var(--ink);margin-bottom:.2rem}
+.card .p{font-size:.83rem;color:var(--muted)}
+
+ul,ol{padding-left:1.15rem;margin:0 0 1rem}
+li{margin-bottom:.35rem}
+
+footer.site{border-top:1px solid var(--line);margin-top:3.5rem;padding:1.8rem 0 3rem;font-size:.855rem;color:var(--muted);background:var(--soft)}
+footer.site a{color:var(--body)}
+footer.site .row{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:.9rem}
+main{padding-bottom:1rem}
+.crumb{font-size:.82rem;color:var(--muted);margin:1.1rem 0 .2rem}
+.crumb a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="/">MedSpa<span>Stack</span></a>
+    <nav>{nav.map(([h,l]) => <a href={h}>{l}</a>)}</nav>
+  </div>
+</header>
+<main class="wrap"><slot /></main>
+<footer class="site">
+  <div class="wrap">
+    <div class="row">
+      <a href="/about/">About</a>
+      <a href="/methodology/">How we test</a>
+      <a href="/disclosure/">Affiliate disclosure</a>
+      <a href="/pricing/">Pricing database</a>
+    </div>
+    <p style="margin:0">
+      MedSpaStack publishes independent pricing and feature research on med spa and aesthetics
+      practice software. We earn affiliate commissions from some vendors — every page that
+      contains a paid link says so, and our <a href="/disclosure/">disclosure page</a> lists
+      exactly which vendors pay us. Commission does not affect placement or scoring.
+    </p>
+    <p style="margin:.7rem 0 0">© {year} MedSpaStack. Prices shown are collected from vendors' own public pages and carry the date they were verified.</p>
+  </div>
+</footer>
+</body>
+</html>

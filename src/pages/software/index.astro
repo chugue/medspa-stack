@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { vendors, money, VERIFIED_LABEL, KLASS_LABEL } from '../../data/site.js';
+---
+<Base
+  title="All med spa software platforms we track (2026)"
+  description="Every med spa and aesthetics practice management platform in our database, with starting price, type and setup fee."
+>
+<div class="crumb"><a href="/">Home</a> → Software</div>
+<h1>Every platform we track</h1>
+<p class="lede">
+  {vendors.length} med spa and aesthetics platforms. Each page carries the vendor's published
+  pricing, the fees that sit outside it, and our read on whether the product has genuine clinical
+  charting. Sorted by published starting price.
+</p>
+
+<div class="cards">
+  {vendors.map(v => (
+    <a class="card" href={`/software/${v.slug}/`}>
+      <div class="n">{v.displayName}</div>
+      <div class="p">
+        <span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span>
+        {' '}{v.startingPrice != null ? `from ${money(v.startingPrice)}/mo` : 'quote only'}
+        {v.setupFee ? ` · ${money(v.setupFee)} setup` : ''}
+      </div>
+    </a>
+  ))}
+</div>
+
+<p class="stamp">Last verified {VERIFIED_LABEL}. <a href="/methodology/">How we collect this</a>.</p>
+</Base>

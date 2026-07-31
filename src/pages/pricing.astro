@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import { vendors, money, VERIFIED_LABEL, KLASS_LABEL } from '../data/site.js';
+
+const pub = vendors.filter(v => v.pricingPublic);
+const priv = vendors.filter(v => !v.pricingPublic);
+---
+<Base
+  title="Med spa software pricing database (2026) — every published tier and fee"
+  description="Verified starting prices, tier structures, onboarding fees and add-on costs for 24 med spa and aesthetics practice management platforms. Read from vendor pricing pages and dated."
+>
+<div class="crumb"><a href="/">Home</a> → Pricing database</div>
+<h1>Med spa software pricing database</h1>
+
+<p class="lede">
+  Every published price we can verify, plus the fees that do not appear next to it. Collected by
+  reading each vendor's own pricing page — never a third-party directory, because those go stale
+  and nobody dates them.
+</p>
+
+<div class="note">
+  <p>
+    <strong>{pub.length} of {vendors.length} platforms publish a price.</strong> The other
+    {priv.length} require a sales call. We list those too, with whatever tier structure they
+    disclose, because "you must call to find out" is itself useful information when you are
+    shortlisting.
+  </p>
+  <p class="stamp" style="margin-top:.6rem">Last verified {VERIFIED_LABEL}.</p>
+</div>
+
+<h2>Published pricing</h2>
+<div class="scroll">
+<table>
+  <thead>
+    <tr>
+      <th>Platform</th><th>Type</th><th class="num">From</th>
+      <th class="num">Setup</th><th>Free trial</th><th>Basis</th>
+    </tr>
+  </thead>
+  <tbody>
+  {pub.map(v => (
+    <tr>
+      <td><a href={`/software/${v.slug}/`}>{v.displayName}</a>{v.promo && <span class="tag unclear" style="margin-left:.35rem">promo rate</span>}</td>
+      <td><span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span></td>
+      <td class="num">{v.startingPrice != null ? money(v.startingPrice) + '/mo' : 'listed'}</td>
+      <td class="num">{v.setupFee ? money(v.setupFee) : '—'}</td>
+      <td>{v.freeTrial ? String(v.freeTrial).split('—')[0].trim() : '—'}</td>
+      <td>{(v.entryNote || '—').split(';')[0]}</td>
+    </tr>
+  ))}
+  </tbody>
+</table>
+</div>
+
+<h2>Quote-only platforms</h2>
+<p>
+  These vendors do not publish pricing. Several are the most clinically capable systems in the
+  category — that is the trade-off. Expect a discovery call and a proposal keyed to your provider
+  count.
+</p>
+<div class="scroll">
+<table>
+  <thead><tr><th>Platform</th><th>Type</th><th>What they do disclose</th></tr></thead>
+  <tbody>
+  {priv.map(v => (
+    <tr>
+      <td><a href={`/software/${v.slug}/`}>{v.displayName}</a>{v.promo && <span class="tag unclear" style="margin-left:.35rem">promo rate</span>}</td>
+      <td><span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span></td>
+      <td>{v.tiers?.length
+        ? `${v.tiers.length} named tier${v.tiers.length > 1 ? 's' : ''}: ${v.tiers.map(t => t.tier_name).filter(Boolean).join(', ')}`
+        : 'No public tier structure'}</td>
+    </tr>
+  ))}
+  </tbody>
+</table>
+</div>
+
+<h2>Fees that sit outside the sticker price</h2>
+<p>
+  This is the part of the category that a comparison table normally flattens away. Each note below
+  is taken from the vendor's own published material on the date shown.
+</p>
+
+{vendors.filter(v => v.hiddenCosts).map(v => (
+  <div style="margin:1.3rem 0;padding-left:.9rem;border-left:3px solid var(--line)">
+    <h3 style="margin:.2rem 0 .35rem;font-size:1rem">
+      <a href={`/software/${v.slug}/`}>{v.displayName}</a>
+    </h3>
+    <p style="font-size:.9rem;margin:0">{v.hiddenCosts}</p>
+  </div>
+))}
+
+<hr />
+<div class="note">
+  <p>
+    <strong>Corrections.</strong> If a price here is wrong or out of date, it is a defect and we
+    want to know. Prices move in this category without announcement, and a stale figure is worse
+    than no figure. <a href="/about/">Send us the vendor page</a> and we will republish with a new
+    verification date.
+  </p>
+</div>
+</Base>

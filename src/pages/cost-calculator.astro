@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import { vendors, VERIFIED_LABEL } from '../data/site.js';
+
+const rows = vendors
+  .filter(v => v.startingPrice != null)
+  .map(v => ({
+    slug: v.slug, name: v.displayName, klass: v.klass,
+    price: v.startingPrice, basis: v.billingBasis,
+    setup: v.setupFee || 0,
+    tier: v.entryTier || 'entry tier', promo: !!v.promo,
+    note: (v.entryNote || '').split(';')[0],
+  }));
+---
+<Base
+  title="Med spa software cost calculator — twelve-month total, not the sticker price"
+  description="Enter your locations and providers to see what each med spa platform's entry tier actually costs over a year, including onboarding fees. Built on verified published pricing."
+>
+<div class="crumb"><a href="/">Home</a> → Cost calculator</div>
+<h1>What will it actually cost you?</h1>
+
+<p class="lede">
+  Published starting prices in this category are not comparable to each other, because some are
+  billed per location, some per user, and some flat. Enter your shape and see the same thirteen
+  platforms converted onto one basis, with onboarding fees folded into year one.
+</p>
+
+<div class="note">
+  <p>
+    This covers the <strong>entry tier</strong> of every platform that publishes pricing. It is a
+    floor, not a quote — most practices end up on a middle tier with paid modules attached. Use it
+    to eliminate options and to spot where the per-location and per-user models cross over.
+  </p>
+</div>
+
+<form id="f" style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:1.6rem 0;padding:1.2rem;background:var(--soft);border:1px solid var(--line);border-radius:9px">
+  <label style="display:block">
+    <span style="display:block;font-size:.82rem;font-weight:640;color:var(--ink);margin-bottom:.3rem">Locations</span>
+    <input id="loc" type="number" min="1" max="50" value="1" style="width:100%;padding:.5rem;border:1px solid var(--line);border-radius:6px;font:inherit" />
+  </label>
+  <label style="display:block">
+    <span style="display:block;font-size:.82rem;font-weight:640;color:var(--ink);margin-bottom:.3rem">Providers &amp; staff using it</span>
+    <input id="usr" type="number" min="1" max="200" value="4" style="width:100%;padding:.5rem;border:1px solid var(--line);border-radius:6px;font:inherit" />
+  </label>
+  <label style="display:block">
+    <span style="display:block;font-size:.82rem;font-weight:640;color:var(--ink);margin-bottom:.3rem">Show</span>
+    <select id="filt" style="width:100%;padding:.5rem;border:1px solid var(--line);border-radius:6px;font:inherit">
+      <option value="all">All platforms</option>
+      <option value="emr">Clinical EMR only</option>
+      <option value="booking">Booking / POS only</option>
+    </select>
+  </label>
+</form>
+
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>Platform</th><th>Tier</th><th class="num">Per month</th><th class="num">Year one</th><th>Basis</th></tr>
+  </thead>
+  <tbody id="out"></tbody>
+</table>
+</div>
+
+<p class="stamp" id="stamp"></p>
+
+<h2>Reading the result</h2>
+<p>
+  The ordering usually changes as you add locations or staff, and that is the point. A platform
+  that looks cheapest for a solo practice can be the most expensive at three locations, and a
+  per-user product that looks trivially cheap at $15 becomes mid-market once six people log in.
+</p>
+<p>
+  Year one includes any published one-time onboarding fee. Aesthetic Record's $399 startup
+  investment is the largest published example, and it does not appear anywhere near the $15
+  headline on their pricing page.
+</p>
+<p>
+  What this deliberately does not model: paid add-on modules, text and email overages, payment
+  processing spread, and migration costs. Those vary too much by practice to fake precision.
+  <a href="/pricing/">The pricing database lists them per vendor.</a>
+</p>
+
+<script define:vars={{ rows, VERIFIED_LABEL }}>
+  const out = document.getElementById('out');
+  const stamp = document.getElementById('stamp');
+  const fmt = n => '$' + n.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  function calc() {
+    const loc = Math.max(1, +document.getElementById('loc').value || 1);
+    const usr = Math.max(1, +document.getElementById('usr').value || 1);
+    const filt = document.getElementById('filt').value;
+
+    const data = rows
+      .filter(r => filt === 'all' ? true : r.klass === filt)
+      .map(r => {
+        const mult = r.basis === 'location' ? loc : r.basis === 'user' ? usr : 1;
+        const monthly = r.price * mult;
+        return { ...r, monthly, year: monthly * 12 + r.setup, mult };
+      })
+      .sort((a, b) => a.year - b.year);
+
+    out.innerHTML = data.map(r => `
+      <tr>
+        <td><a href="/software/${r.slug}/">${r.name}</a></td>
+        <td>${r.tier}${r.promo ? ' <span class="tag unclear">promo</span>' : ''}</td>
+        <td class="num">${fmt(r.monthly)}</td>
+        <td class="num"><strong>${fmt(r.year)}</strong>${r.setup ? ` <span style="color:var(--muted);font-size:.8rem">incl. ${fmt(r.setup)} setup</span>` : ''}</td>
+        <td style="font-size:.82rem;color:var(--muted)">${
+          r.basis === 'location' ? `per location × ${r.mult}` :
+          r.basis === 'user' ? `per user × ${r.mult}` : 'flat rate'
+        }</td>
+      </tr>`).join('') || '<tr><td colspan="5">No platforms match that filter.</td></tr>';
+
+    stamp.textContent = `${data.length} platforms · entry tier · ${loc} location${loc > 1 ? 's' : ''}, ${usr} user${usr > 1 ? 's' : ''} · pricing verified ${VERIFIED_LABEL}`;
+  }
+
+  document.getElementById('f').addEventListener('input', calc);
+  calc();
+</script>
+</Base>

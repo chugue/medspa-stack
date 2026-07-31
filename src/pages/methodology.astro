@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import { vendors, VERIFIED_LABEL } from '../data/site.js';
+const pub = vendors.filter(v => v.pricingPublic).length;
+---
+<Base
+  title="How MedSpaStack collects and verifies pricing"
+  description="Our sourcing rules, what we refuse to score, our correction policy, and how affiliate commission is kept out of the research."
+>
+<div class="crumb"><a href="/">Home</a> → Methodology</div>
+<h1>How we collect this</h1>
+
+<p class="lede">
+  Most software comparison content in this category is written by vendors about themselves, or
+  assembled from directory listings that nobody dates. We do something narrower and, we think, more
+  useful: read the vendors' own pages, record what they say, stamp the date, and re-check on a
+  schedule.
+</p>
+
+<h2>Where numbers come from</h2>
+<ol>
+  <li>
+    <strong>The vendor's own published page, or nothing.</strong> Every price on this site was read
+    off the vendor's public pricing page. We do not copy figures from Capterra, G2, Software Advice
+    or other comparison sites — those are frequently stale and almost never carry a date.
+  </li>
+  <li>
+    <strong>Every figure is dated.</strong> Pricing in this category changes without announcement.
+    An undated price is a guess. Ours currently read {VERIFIED_LABEL}.
+  </li>
+  <li>
+    <strong>Re-checked weekly.</strong> An automated pass re-reads each pricing page and flags
+    changes for review before anything is republished.
+  </li>
+  <li>
+    <strong>"Quote only" is recorded as a finding, not a gap.</strong>
+    {vendors.length - pub} of {vendors.length} platforms decline to publish rates. That is a real
+    fact about how they sell, and it belongs in your shortlist decision.
+  </li>
+</ol>
+
+<h2>What we refuse to do</h2>
+<ul>
+  <li>
+    <strong>Score things we cannot verify.</strong> Several vendors market clinical capability in
+    terms we could not confirm from public documentation. We label those unverified rather than
+    guessing. An unverified label is information; an invented score is noise.
+  </li>
+  <li>
+    <strong>Publish an overall rating out of ten.</strong> The correct platform depends on whether
+    you chart treatments, how many locations you run and how your team is shaped. A single ranked
+    list would flatten exactly the variables that decide the answer.
+  </li>
+  <li>
+    <strong>Give clinical, legal or regulatory advice.</strong> What your practice must document,
+    who must supervise it, and what your state requires are questions for your medical director and
+    your state board. We write about software.
+  </li>
+  <li>
+    <strong>Let commission influence placement.</strong> See below.
+  </li>
+</ul>
+
+<h2>How we classify clinical capability</h2>
+<p>
+  We sort platforms into clinical EMR, hybrid, booking/POS, and add-on tools, based on whether the
+  vendor documents structured or SOAP-style treatment charting, treatment-linked consent capture,
+  before-and-after photo management tied to the patient record, and e-prescribing.
+</p>
+<p>
+  Intake forms and file attachments are common on booking platforms and are <em>not</em> charting.
+  That distinction is the single most consequential one in the category, so we apply it strictly and
+  say what evidence we used on every vendor page.
+</p>
+
+<h2>Corrections</h2>
+<p>
+  A wrong price is a defect. If you were quoted something that differs from what we publish, send
+  us the detail and we will re-read the source and republish with a new verification date, whether
+  the correction flatters the vendor or not.
+</p>
+<p>
+  We correct errors of fact immediately. We do not remove accurate findings because a vendor
+  dislikes them. Where a vendor disputes an editorial classification rather than a fact, we will
+  publish their position alongside ours.
+</p>
+
+<h2>Money</h2>
+<p>
+  We earn affiliate commission from some of the platforms listed here. That relationship is
+  disclosed on every page that carries a paid link, and the
+  <a href="/disclosure/">disclosure page</a> names exactly which vendors pay us and which do not.
+</p>
+<p>
+  The structural safeguard is that our core asset — the pricing database — is generated from
+  vendor documentation, not from an editor's preference. Ordering in tables is by price or
+  alphabetical, never by commission. Platforms that pay us nothing, including several
+  quote-only enterprise systems, are covered on the same terms as those that do.
+</p>
+<p>
+  If you ever find a page where the commercial relationship appears to have shaped the conclusion,
+  that is a serious failure and we want to hear about it.
+</p>
+
+<h2>Independence, plainly stated</h2>
+<p>
+  MedSpaStack is not owned by, funded by, or employed by any software vendor in this category, and
+  no vendor has editorial input. We mention this explicitly because it is not the norm here — the
+  most visible "independent" comparison resources in med spa software have direct commercial ties
+  to platforms they review, sometimes disclosed only in a founder's job title. Readers deserve to
+  know which kind of site they are reading.
+</p>
+</Base>

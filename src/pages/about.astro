@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import { vendors, VERIFIED_LABEL } from '../data/site.js';
+---
+<Base
+  title="About MedSpaStack"
+  description="Who runs MedSpaStack, what we do and do not claim expertise in, and how to reach us."
+>
+<div class="crumb"><a href="/">Home</a> → About</div>
+<h1>About MedSpaStack</h1>
+
+<p class="lede">
+  MedSpaStack is a pricing and capability research project covering med spa and aesthetics practice
+  management software. It is run by one person, and it does one thing carefully rather than many
+  things approximately.
+</p>
+
+<h2>Who runs it</h2>
+<p>
+  <strong>Seounghoon Kim</strong> — founder and editor. My background is in software, not in
+  aesthetics medicine, and I want that stated plainly at the top rather than buried.
+</p>
+<p>
+  What I bring to this category is not clinical experience. It is a willingness to read
+  twenty-four vendors' pricing pages properly, notice that four of them bill per location while
+  one bills per user, work out what that does to a real invoice, and publish the result with a date
+  on it. That work is unglamorous, nobody else in this niche was doing it consistently, and it
+  turns out to be what buyers are missing.
+</p>
+
+<h2>What we claim, and what we don't</h2>
+<p>
+  <strong>We claim accuracy about software.</strong> Prices, tier structures, billing bases,
+  onboarding fees, add-on modules, and whether a platform documents genuine clinical charting.
+  Every one of those is verifiable from public sources, and we show our source and date on each
+  vendor page.
+</p>
+<p>
+  <strong>We do not claim clinical or regulatory authority.</strong> We will not tell you what your
+  practice must document, whether a treatment requires supervision, or how your state regulates
+  medical direction. Those questions belong to your medical director, your attorney, and your state
+  board. A software comparison site answering them would be doing you harm.
+</p>
+<p>
+  Where a question sits on the boundary — for example, whether a platform's consent capture is
+  adequate for your treatment mix — we describe the capability and tell you to verify it against
+  your own requirements. That is the honest edge of what we can know.
+</p>
+
+<h2>Why this exists</h2>
+<p>
+  Med spa software is sold with headline prices that bear little relationship to the invoice. A
+  $15 tier that is actually per user. A $140 tier that is promotional, annual-billing, and per
+  location. Charting, e-prescribing, forms and marketing broken out as paid modules. Onboarding
+  fees that appear at contract, not on the pricing page.
+</p>
+<p>
+  Meanwhile the comparison content that ranks for these searches is largely written by vendors
+  about themselves, or by sites with undisclosed commercial ties to a platform they recommend.
+  There was room for someone to just publish the numbers, dated, with the fees included.
+</p>
+
+<h2>Contact and corrections</h2>
+<p>
+  Corrections, vendor pricing changes, and questions: <strong>hello@medspastack.net</strong>
+</p>
+<p>
+  If you are a vendor and something here is factually wrong, send the source and it will be fixed
+  and re-dated quickly. If you disagree with an editorial classification rather than a fact, send
+  your position and we will publish it alongside ours. We do not take pages down because a vendor
+  dislikes an accurate finding.
+</p>
+<p>
+  If you are a buyer who was quoted something different from what we publish, that is the most
+  useful email we can receive. Real quotes are how we find out where published pricing has drifted.
+</p>
+
+<hr />
+<p class="stamp">
+  Currently tracking {vendors.length} platforms. Pricing last verified {VERIFIED_LABEL}.
+  <a href="/methodology/">How we collect this</a> ·
+  <a href="/disclosure/">Affiliate disclosure</a>
+</p>
+</Base>
