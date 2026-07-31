@@ -33,18 +33,18 @@ const rows = vendors
   </p>
 </div>
 
-<form id="f" style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:1.6rem 0;padding:1.2rem;background:var(--soft);border:1px solid var(--line);border-radius:9px">
+<form id="f" style="display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:1.9rem 0;padding:1.35rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)">
   <label style="display:block">
-    <span style="display:block;font-size:.82rem;font-weight:640;color:var(--ink);margin-bottom:.3rem">Locations</span>
-    <input id="loc" type="number" min="1" max="50" value="1" style="width:100%;padding:.5rem;border:1px solid var(--line);border-radius:6px;font:inherit" />
+    <span class="lbl">Locations</span>
+    <input id="loc" type="number" min="1" max="50" value="1" />
   </label>
   <label style="display:block">
-    <span style="display:block;font-size:.82rem;font-weight:640;color:var(--ink);margin-bottom:.3rem">Providers &amp; staff using it</span>
-    <input id="usr" type="number" min="1" max="200" value="4" style="width:100%;padding:.5rem;border:1px solid var(--line);border-radius:6px;font:inherit" />
+    <span class="lbl">Providers &amp; staff using it</span>
+    <input id="usr" type="number" min="1" max="200" value="4" />
   </label>
   <label style="display:block">
-    <span style="display:block;font-size:.82rem;font-weight:640;color:var(--ink);margin-bottom:.3rem">Show</span>
-    <select id="filt" style="width:100%;padding:.5rem;border:1px solid var(--line);border-radius:6px;font:inherit">
+    <span class="lbl">Show</span>
+    <select id="filt">
       <option value="all">All platforms</option>
       <option value="emr">Clinical EMR only</option>
       <option value="booking">Booking / POS only</option>

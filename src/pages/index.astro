@@ -4,31 +4,49 @@ import { vendors, priced, money, VERIFIED_LABEL, KLASS_LABEL } from '../data/sit
 
 const emr = vendors.filter(v => v.klass === 'emr');
 const booking = vendors.filter(v => v.klass === 'booking');
-const withSetup = vendors.filter(v => v.setupFee);
 const promo = vendors.filter(v => v.promo);
 const cheapest = priced.slice(0, 6);
 ---
 <Base
   title="MedSpaStack — independent pricing research on med spa software"
-  description="Verified pricing, hidden fees and clinical-capability data for 24 med spa and aesthetics practice management platforms. Collected from vendor pages, dated, and updated weekly."
+  description="Verified pricing, hidden fees and clinical-capability data for 24 med spa and aesthetics practice management platforms. Read from vendor pages, dated, rechecked weekly."
 >
-<h1>What med spa software actually costs</h1>
+<p class="eyebrow" style="margin-top:2.6rem">Independent research · verified {VERIFIED_LABEL}</p>
+<h1 style="max-width:16ch">What med spa software actually costs</h1>
 
 <p class="lede">
-  We track published pricing, setup fees and add-on charges for {vendors.length} med spa and
-  aesthetics platforms, and record which ones have real medical charting versus which are
-  booking systems wearing a clinical label. Every number carries the date we read it off the
-  vendor's own page.
+  We track published pricing, setup fees and add-on charges across {vendors.length} med spa and
+  aesthetics platforms — and record which ones have real medical charting versus which are booking
+  systems wearing a clinical label. Every number carries the date we read it off the vendor's own
+  page.
 </p>
+
+<div class="stats">
+  <div class="stat">
+    <b>{vendors.length}</b>
+    <span>platforms tracked</span>
+  </div>
+  <div class="stat">
+    <b>{priced.length}</b>
+    <span>publish a price at all</span>
+  </div>
+  <div class="stat">
+    <b>{promo.length}</b>
+    <span>quote a promo or annual-prepay rate</span>
+  </div>
+  <div class="stat">
+    <b>{booking.length}</b>
+    <span>have no medical charting</span>
+  </div>
+</div>
 
 <div class="note accent">
   <p>
     <strong>Why this site exists.</strong> Advertised starting prices in this category are close to
-    meaningless. Of the {priced.length} platforms that publish a price at all, {promo.length} are
-    quoting a promotional or annual-prepay rate rather than their standard one, several bill per
-    location or per user rather than per business, and nearly every one charges separately for the
-    features a med spa actually needs — charting, e-prescribing, forms, marketing. We publish the
-    whole bill, not the headline.
+    meaningless. Several platforms bill per location or per user rather than per business, five
+    quote a promotional or annual-prepay rate as if it were standard, and nearly every one charges
+    separately for the things a med spa actually needs — charting, e-prescribing, forms, marketing.
+    We publish the whole bill, not the headline.
   </p>
 </div>
 
@@ -40,11 +58,11 @@ const cheapest = priced.slice(0, 6);
   </a>
   <a class="card" href="/emr-vs-booking/">
     <div class="n">EMR or booking system?</div>
-    <div class="p">{emr.length} of these have real medical charting. {booking.length} do not. This is the decision most buyers get wrong first.</div>
+    <div class="p">{emr.length} have real medical charting. {booking.length} have none. The decision most buyers get wrong first.</div>
   </a>
   <a class="card" href="/cost-calculator/">
     <div class="n">Real cost calculator</div>
-    <div class="p">Enter your locations, providers and the modules you need. See the twelve-month total, not the sticker price.</div>
+    <div class="p">Enter your locations and providers. See the twelve-month total, not the sticker price.</div>
   </a>
   <a class="card" href="/methodology/">
     <div class="n">How we collect this</div>
@@ -53,15 +71,15 @@ const cheapest = priced.slice(0, 6);
 </div>
 
 <h2>Lowest published starting prices</h2>
-<p>
-  Sorted by advertised entry price. Read the billing note before drawing conclusions — several of
-  these are per user or per location, which changes the maths completely once you have a team.
+<p class="prose">
+  Sorted by advertised entry price. Read the billing basis before drawing conclusions — several of
+  these are per user or per location, which changes the arithmetic entirely once you have a team.
 </p>
 
 <div class="scroll">
 <table>
   <thead>
-    <tr><th>Platform</th><th>Type</th><th class="num">From</th><th>Billing basis</th><th class="num">Setup fee</th></tr>
+    <tr><th>Platform</th><th>Type</th><th class="num">From</th><th>Billing basis</th><th class="num">Setup</th></tr>
   </thead>
   <tbody>
     {cheapest.map(v => (
@@ -80,6 +98,7 @@ const cheapest = priced.slice(0, 6);
 
 <h2>The three most expensive assumptions</h2>
 
+<div class="prose">
 <h3>1. That the advertised price is per business</h3>
 <p>
   It usually is not. Boulevard, Mangomint, Mindbody and Square Appointments price
@@ -91,23 +110,24 @@ const cheapest = priced.slice(0, 6);
 
 <h3>2. That clinical charting is included</h3>
 <p>
-  Fresha, Vagaro, Square Appointments, WellnessLiving, Mindbody and Booker have no medical
-  charting at all. They are excellent booking systems. If you inject, laser or prescribe, you will
-  be buying a second system — a cost that rarely appears in any comparison table.
+  Fresha, Vagaro, Square Appointments, WellnessLiving, Mindbody and Booker have no medical charting
+  at all. They are excellent booking systems. If you inject, laser or prescribe, you will be buying
+  a second system — a cost that rarely appears in any comparison table.
   <a href="/emr-vs-booking/">We sorted every platform on this axis.</a>
 </p>
 
 <h3>3. That the annual price is the price</h3>
 <p>
-  Most published rates in this category assume annual prepayment, and several are promotional.
-  Boulevard's listed $140 tier is a summer promotion against a $176 standard rate, on annual
-  billing, per location. We record the standard rate alongside the promotional one.
+  Most published rates here assume annual prepayment, and several are promotional. Boulevard's
+  listed $140 tier is a summer promotion against a $176 standard rate, on annual billing, per
+  location. We record the standard rate alongside the promotional one.
 </p>
+</div>
 
 <hr />
-<p class="stamp">
-  Pricing last verified {VERIFIED_LABEL} against each vendor's own published pricing page.
-  Vendors change prices without notice; we recheck weekly and stamp every figure.
-  Spotted something stale or wrong? <a href="/about/">Tell us</a> — corrections get published.
+<p class="stamp prose">
+  Pricing last verified {VERIFIED_LABEL} against each vendor's own published pricing page. Vendors
+  change prices without notice; an automated pass rechecks weekly and every figure carries its
+  date. Spotted something stale or wrong? <a href="/about/">Tell us</a> — corrections get published.
 </p>
 </Base>
