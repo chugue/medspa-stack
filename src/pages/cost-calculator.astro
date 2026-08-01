@@ -1,84 +1,107 @@
 ---
 import Base from '../layouts/Base.astro';
-import { vendors, VERIFIED_LABEL } from '../data/site.js';
+import Stamp from '../components/Stamp.astro';
+import { vendors, VERIFIED_LABEL, BADGE, KLASS_LABEL } from '../data/site.js';
 
 const rows = vendors
   .filter(v => v.startingPrice != null)
   .map(v => ({
     slug: v.slug, name: v.displayName, klass: v.klass,
+    klassLabel: KLASS_LABEL[v.klass], badge: BADGE[v.klass] || 'ms-badge-unverified',
     price: v.startingPrice, basis: v.billingBasis,
     setup: v.setupFee || 0,
     tier: v.entryTier || 'entry tier', promo: !!v.promo,
-    note: (v.entryNote || '').split(';')[0],
   }));
 ---
 <Base
   title="Med spa software cost calculator — twelve-month total, not the sticker price"
   description="Enter your locations and providers to see what each med spa platform's entry tier actually costs over a year, including onboarding fees. Built on verified published pricing."
+  crumbs={['Cost calculator']}
 >
-<div class="crumb"><a href="/">Home</a> → Cost calculator</div>
-<h1>What will it actually cost you?</h1>
-
-<p class="lede">
-  Published starting prices in this category are not comparable to each other, because some are
-  billed per location, some per user, and some flat. Enter your shape and see the same thirteen
-  platforms converted onto one basis, with onboarding fees folded into year one.
-</p>
-
-<div class="note">
-  <p>
-    This covers the <strong>entry tier</strong> of every platform that publishes pricing. It is a
-    floor, not a quote — most practices end up on a middle tier with paid modules attached. Use it
-    to eliminate options and to spot where the per-location and per-user models cross over.
+<section class="ms-section">
+  <p class="ms-eyebrow">Tool</p>
+  <h1 class="ms-display">What will it actually cost you?</h1>
+  <p class="ms-lede ms-measure">
+    Published starting prices in this category are not comparable to each other, because some are
+    billed per location, some per user, and some flat. Enter your shape and see the same
+    {' '}{rows.length} platforms converted onto one basis, with onboarding folded into year one.
   </p>
-</div>
+  <Stamp small />
+</section>
 
-<form id="f" style="display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:1.9rem 0;padding:1.35rem 1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)">
-  <label style="display:block">
-    <span class="lbl">Locations</span>
-    <input id="loc" type="number" min="1" max="50" value="1" />
-  </label>
-  <label style="display:block">
-    <span class="lbl">Providers &amp; staff using it</span>
-    <input id="usr" type="number" min="1" max="200" value="4" />
-  </label>
-  <label style="display:block">
-    <span class="lbl">Show</span>
-    <select id="filt">
-      <option value="all">All platforms</option>
-      <option value="emr">Clinical EMR only</option>
-      <option value="booking">Booking / POS only</option>
-    </select>
-  </label>
-</form>
+<section class="ms-section">
+  <div class="ms-calc blueprint">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="ms-calc-controls">
+      <div class="ms-field">
+        <label for="loc">Locations</label>
+        <input class="ms-input" id="loc" type="number" min="1" max="50" value="1" />
+      </div>
+      <div class="ms-field">
+        <label for="usr">Staff logins</label>
+        <input class="ms-input" id="usr" type="number" min="1" max="200" value="4" />
+        <span class="ms-field-hint">Everyone who needs their own account</span>
+      </div>
+      <div class="ms-field">
+        <label for="filt">Show</label>
+        <select class="ms-select" id="filt">
+          <option value="all">All platforms</option>
+          <option value="emr">Clinical EMR only</option>
+          <option value="booking">Booking / POS only</option>
+        </select>
+      </div>
+    </div>
 
-<div class="scroll">
-<table>
-  <thead>
-    <tr><th>Platform</th><th>Tier</th><th class="num">Per month</th><th class="num">Year one</th><th>Basis</th></tr>
-  </thead>
-  <tbody id="out"></tbody>
-</table>
-</div>
+    <div class="ms-calc-out">
+      <div class="ms-scroller">
+        <table class="ms-data">
+          <thead>
+            <tr>
+              <th scope="col" class="num">#</th>
+              <th scope="col">Platform</th>
+              <th scope="col">Entry tier</th>
+              <th scope="col" class="num">Per month</th>
+              <th scope="col" class="num">Year one</th>
+              <th scope="col">Basis</th>
+            </tr>
+          </thead>
+          <tbody id="out"></tbody>
+        </table>
+      </div>
+      <p class="ms-scrollnote" id="stamp"></p>
+    </div>
+  </div>
+</section>
 
-<p class="stamp" id="stamp"></p>
+<section class="ms-section">
+  <div class="ms-callout">
+    <p class="ms-callout-title">This is a floor, not a quote</p>
+    <p>
+      It covers the entry tier of every platform that publishes pricing. Most practices end up on a
+      middle tier with paid modules attached. Use it to eliminate options and to spot where the
+      per-location and per-user models cross over.
+    </p>
+  </div>
+</section>
 
-<h2>Reading the result</h2>
-<p>
-  The ordering usually changes as you add locations or staff, and that is the point. A platform
-  that looks cheapest for a solo practice can be the most expensive at three locations, and a
-  per-user product that looks trivially cheap at $15 becomes mid-market once six people log in.
-</p>
-<p>
-  Year one includes any published one-time onboarding fee. Aesthetic Record's $399 startup
-  investment is the largest published example, and it does not appear anywhere near the $15
-  headline on their pricing page.
-</p>
-<p>
-  What this deliberately does not model: paid add-on modules, text and email overages, payment
-  processing spread, and migration costs. Those vary too much by practice to fake precision.
-  <a href="/pricing/">The pricing database lists them per vendor.</a>
-</p>
+<section class="ms-section">
+  <h2 class="ms-h2">Reading the result</h2>
+  <p class="ms-measure">
+    The ordering usually changes as you add locations or staff, and that is the point. A platform
+    that looks cheapest for a solo practice can be the most expensive at three locations, and a
+    per-user product that looks trivially cheap at $15 becomes mid-market once six people log in.
+  </p>
+  <p class="ms-measure">
+    Year one includes any published one-time onboarding fee. Aesthetic Record's $399 startup
+    investment is the largest published example, and it does not appear anywhere near the $15
+    headline on their pricing page.
+  </p>
+  <p class="ms-measure">
+    What this deliberately does not model: paid add-on modules, text and email overages, payment
+    processing spread, and migration costs. Those vary too much by practice to fake precision.
+    <a href="/pricing/">The pricing database lists them per vendor.</a>
+  </p>
+</section>
 
 <script define:vars={{ rows, VERIFIED_LABEL }}>
   const out = document.getElementById('out');
@@ -99,22 +122,33 @@ const rows = vendors
       })
       .sort((a, b) => a.year - b.year);
 
-    out.innerHTML = data.map(r => `
+    out.innerHTML = data.map((r, i) => `
       <tr>
-        <td><a href="/software/${r.slug}/">${r.name}</a></td>
-        <td>${r.tier}${r.promo ? ' <span class="tag unclear">promo</span>' : ''}</td>
+        <td class="num"><span class="ms-rank">${i + 1}</span></td>
+        <td>
+          <span class="ms-cell-name"><a href="/software/${r.slug}/">${r.name}</a></span>
+          <span class="ms-cell-flags">
+            <span class="ms-badge ${r.badge}">${r.klassLabel}</span>
+            ${r.promo ? '<span class="ms-badge ms-badge-promo">Promo rate</span>' : ''}
+          </span>
+        </td>
+        <td class="prose">${r.tier}</td>
         <td class="num">${fmt(r.monthly)}</td>
-        <td class="num"><strong>${fmt(r.year)}</strong>${r.setup ? ` <span style="color:var(--muted);font-size:.8rem">incl. ${fmt(r.setup)} setup</span>` : ''}</td>
-        <td style="font-size:.82rem;color:var(--muted)">${
+        <td class="num num-strong">${fmt(r.year)}${
+          r.setup ? `<small style="display:block;font-weight:400;opacity:.65">incl. ${fmt(r.setup)} setup</small>` : ''
+        }</td>
+        <td class="prose">${
           r.basis === 'location' ? `per location × ${r.mult}` :
           r.basis === 'user' ? `per user × ${r.mult}` : 'flat rate'
         }</td>
-      </tr>`).join('') || '<tr><td colspan="5">No platforms match that filter.</td></tr>';
+      </tr>`).join('') || '<tr><td colspan="6" class="nil">No platforms match that filter.</td></tr>';
 
-    stamp.textContent = `${data.length} platforms · entry tier · ${loc} location${loc > 1 ? 's' : ''}, ${usr} user${usr > 1 ? 's' : ''} · pricing verified ${VERIFIED_LABEL}`;
+    stamp.textContent =
+      `${data.length} platforms · entry tier · ${loc} location${loc > 1 ? 's' : ''}, ` +
+      `${usr} login${usr > 1 ? 's' : ''} · pricing verified ${VERIFIED_LABEL}`;
   }
 
-  document.getElementById('f').addEventListener('input', calc);
+  document.querySelector('.ms-calc-controls').addEventListener('input', calc);
   calc();
 </script>
 </Base>

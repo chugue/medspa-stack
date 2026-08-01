@@ -1,12 +1,16 @@
 ---
-const { title, description, noindex } = Astro.props;
+import '../styles/tokens.css';
+import '../styles/components.css';
+
+const { title, description, noindex, crumbs } = Astro.props;
 const nav = [
-  ['/pricing/', 'Pricing'],
-  ['/emr-vs-booking/', 'EMR vs booking'],
-  ['/cost-calculator/', 'Calculator'],
+  ['/pricing/', 'Pricing database'],
   ['/software/', 'Platforms'],
-  ['/methodology/', 'Methodology'],
+  ['/emr-vs-booking/', 'EMR or booking'],
+  ['/cost-calculator/', 'Cost calculator'],
+  ['/disclosure/', 'Disclosure'],
 ];
+const path = Astro.url.pathname;
 ---
 <!doctype html>
 <html lang="en">
@@ -16,253 +20,70 @@ const nav = [
 <title>{title}</title>
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex" />}
-<meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#12110f" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1d1f20" media="(prefers-color-scheme: dark)" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="MedSpaStack" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+<link rel="canonical" href={new URL(path, Astro.site)} />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
-<style is:global>
-@font-face{
-  font-family:'Inter';src:url('/fonts/inter.woff2') format('woff2');
-  font-weight:100 900;font-style:normal;font-display:swap;
-}
-@font-face{
-  font-family:'Instrument Serif';src:url('/fonts/instrument-serif.woff2') format('woff2');
-  font-weight:400;font-style:normal;font-display:swap;
-}
-
-:root{
-  --ink:#17150f;
-  --body:#4a463d;
-  --muted:#8a8477;
-  --faint:#b3ad9f;
-  --line:#e6e1d6;
-  --line-soft:#efebe2;
-  --bg:#faf9f7;
-  --panel:#fff;
-  --soft:#f3f0e9;
-  --accent:#0d5c4f;
-  --accent-hi:#0a463c;
-  --accent-soft:#e4efeb;
-  --gold:#8a6320;
-  --gold-soft:#f7f0dd;
-  --shadow:0 1px 2px rgba(23,21,15,.04), 0 8px 24px -12px rgba(23,21,15,.10);
-  --radius:12px;
-  --max:1080px;
-  --measure:70ch;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --ink:#f4f1ea; --body:#b9b3a6; --muted:#8b8578; --faint:#5f5b52;
-    --line:#2b2823; --line-soft:#231f1b;
-    --bg:#12110f; --panel:#191714; --soft:#1d1a16;
-    --accent:#5fc4ae; --accent-hi:#8ad9c6; --accent-soft:#16302a;
-    --gold:#d0aa5e; --gold-soft:#2a2317;
-    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
-  }
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{
-  margin:0;background:var(--bg);color:var(--body);
-  font-family:'Inter',ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  font-size:16.5px;line-height:1.68;
-  font-feature-settings:"kern","liga","cv05","ss01";
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-.prose{max-width:var(--measure)}
-
-a{color:var(--accent);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent) 28%,transparent);transition:border-color .15s,color .15s}
-a:hover{color:var(--accent-hi);border-bottom-color:var(--accent)}
-
-h1,h2,h3,h4{color:var(--ink);margin:0 0 .6rem;font-weight:600;letter-spacing:-.018em;line-height:1.2}
-h1{
-  font-family:'Instrument Serif',Georgia,serif;font-weight:400;
-  font-size:clamp(2.4rem,5.2vw,3.5rem);line-height:1.06;letter-spacing:-.015em;
-  margin:.2rem 0 1rem;
-}
-h2{font-size:1.42rem;margin-top:3rem;letter-spacing:-.016em}
-h3{font-size:1.06rem;margin-top:1.9rem;font-weight:600}
-h2+p,h3+p{margin-top:0}
-p{margin:0 0 1.05rem}
-hr{border:0;border-top:1px solid var(--line);margin:3rem 0}
-
-.lede{font-size:1.2rem;line-height:1.6;color:var(--body);max-width:66ch;margin-bottom:1.8rem;letter-spacing:-.006em}
-.eyebrow{
-  font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--muted);font-weight:600;margin:0 0 .85rem;
-}
-
-/* ---------- header ---------- */
-header.site{
-  border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:saturate(1.4) blur(12px);position:sticky;top:0;z-index:30;
-}
-header.site .wrap{display:flex;align-items:center;gap:2rem;min-height:66px;flex-wrap:wrap;padding-block:.5rem}
-.brand{
-  font-family:'Instrument Serif',Georgia,serif;font-size:1.42rem;font-weight:400;
-  color:var(--ink);border:0;letter-spacing:-.01em;white-space:nowrap;line-height:1;
-}
-.brand em{font-style:normal;color:var(--accent)}
-.brand:hover{color:var(--ink)}
-header.site nav{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.845rem;font-weight:500;margin-left:auto}
-header.site nav a{color:var(--muted);border:0;letter-spacing:-.003em}
-header.site nav a:hover{color:var(--ink)}
-
-/* ---------- callouts ---------- */
-.note{
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
-  padding:1.15rem 1.3rem;font-size:.945rem;margin:1.8rem 0;box-shadow:var(--shadow);
-}
-.note.accent{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 22%,transparent);box-shadow:none}
-.note.warn{background:var(--gold-soft);border-color:color-mix(in srgb,var(--gold) 26%,transparent);box-shadow:none}
-.note p:last-child{margin-bottom:0}
-.note strong{color:var(--ink)}
-.stamp{font-size:.815rem;color:var(--muted);line-height:1.6}
-
-/* ---------- tables ---------- */
-.scroll{
-  overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.6rem 0;
-  border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
-  box-shadow:var(--shadow);
-}
-.scroll table{margin:0;border-radius:inherit}
-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:1.6rem 0}
-thead th{
-  text-align:left;padding:.75rem .95rem;background:var(--soft);color:var(--muted);
-  font-weight:600;font-size:.715rem;letter-spacing:.07em;text-transform:uppercase;
-  white-space:nowrap;border-bottom:1px solid var(--line);
-}
-tbody td,tbody th{
-  text-align:left;padding:.82rem .95rem;border-bottom:1px solid var(--line-soft);
-  vertical-align:top;line-height:1.5;
-}
-tbody th{font-weight:600;color:var(--ink);background:transparent;font-size:.9rem;white-space:nowrap}
-tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
-tbody tr{transition:background .12s}
-tbody tr:hover{background:color-mix(in srgb,var(--soft) 55%,transparent)}
-td.num,th.num{white-space:nowrap;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
-tbody td a{font-weight:550}
-
-/* ---------- tags ---------- */
-.tag{
-  display:inline-block;font-size:.685rem;font-weight:600;padding:.2rem .5rem;
-  border-radius:5px;letter-spacing:.015em;white-space:nowrap;line-height:1.35;
-  border:1px solid transparent;
-}
-.tag.emr{background:#e3edf9;color:#1a4a78;border-color:#cadff2}
-.tag.booking{background:#fbeee3;color:#8b4d1c;border-color:#f2ddc9}
-.tag.hybrid{background:#ebe6f8;color:#4d3b8c;border-color:#ddd5f0}
-.tag.adjacent{background:#ecebe7;color:#55524a;border-color:#e0ded8}
-.tag.unclear{background:#f0efec;color:#75716a;border-color:#e4e2dc}
-@media (prefers-color-scheme: dark){
-  .tag.emr{background:#16283c;color:#8fc0ee;border-color:#22405e}
-  .tag.booking{background:#33210f;color:#e0a26a;border-color:#4a3116}
-  .tag.hybrid{background:#241d3d;color:#b3a2ef;border-color:#352b57}
-  .tag.adjacent{background:#232019;color:#9d978a;border-color:#302c24}
-  .tag.unclear{background:#211e19;color:#8b8578;border-color:#2d2922}
-}
-
-/* ---------- cards ---------- */
-.cards{display:grid;gap:.9rem;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));margin:1.7rem 0}
-.card{
-  border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem 1.25rem;
-  background:var(--panel);display:block;border-bottom-width:1px;
-  transition:transform .16s cubic-bezier(.2,.7,.3,1),box-shadow .16s,border-color .16s;
-}
-.card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 32%,var(--line))}
-.card .n{font-weight:600;color:var(--ink);margin-bottom:.3rem;font-size:.985rem;letter-spacing:-.01em}
-.card .p{font-size:.855rem;color:var(--muted);line-height:1.55}
-
-/* ---------- stats strip ---------- */
-.stats{
-  display:grid;gap:1px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  background:var(--line);border:1px solid var(--line);border-radius:var(--radius);
-  overflow:hidden;margin:2rem 0;
-}
-.stat{background:var(--panel);padding:1.15rem 1.25rem}
-.stat b{
-  display:block;font-family:'Instrument Serif',Georgia,serif;font-weight:400;
-  font-size:2.15rem;line-height:1;color:var(--ink);letter-spacing:-.01em;margin-bottom:.35rem;
-}
-.stat span{font-size:.8rem;color:var(--muted);line-height:1.45;display:block}
-
-ul,ol{padding-left:1.25rem;margin:0 0 1.1rem}
-li{margin-bottom:.5rem;padding-left:.15rem}
-li::marker{color:var(--faint)}
-strong{color:var(--ink);font-weight:600}
-code{font-size:.88em;background:var(--soft);padding:.12em .38em;border-radius:4px}
-
-.crumb{font-size:.79rem;color:var(--muted);margin:1.6rem 0 .3rem;letter-spacing:.005em}
-.crumb a{color:var(--muted);border:0}
-.crumb a:hover{color:var(--accent)}
-
-main{padding-bottom:2rem}
-
-/* ---------- forms ---------- */
-input,select{
-  width:100%;padding:.6rem .7rem;border:1px solid var(--line);border-radius:8px;
-  font:inherit;font-size:.92rem;background:var(--panel);color:var(--ink);
-  transition:border-color .15s,box-shadow .15s;
-}
-input:focus,select:focus{
-  outline:0;border-color:var(--accent);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent);
-}
-label .lbl{display:block;font-size:.755rem;font-weight:600;color:var(--muted);margin-bottom:.4rem;letter-spacing:.05em;text-transform:uppercase}
-
-/* ---------- footer ---------- */
-footer.site{
-  border-top:1px solid var(--line);margin-top:5rem;padding:2.6rem 0 4rem;
-  font-size:.865rem;color:var(--muted);background:var(--soft);
-}
-footer.site a{color:var(--body);border-bottom-color:transparent}
-footer.site a:hover{color:var(--accent);border-bottom-color:var(--accent)}
-footer.site .row{display:flex;gap:1.6rem;flex-wrap:wrap;margin-bottom:1.2rem;font-weight:500}
-footer.site .fine{max-width:64ch;line-height:1.6}
-
-@media(max-width:640px){
-  body{font-size:16px}
-  header.site nav{gap:1.05rem;font-size:.8rem;margin-left:0;width:100%}
-  header.site .wrap{gap:.7rem}
-  h2{margin-top:2.4rem}
-  .stat b{font-size:1.85rem}
-}
-</style>
+<link rel="preload" href="/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin />
 </head>
 <body>
-<header class="site">
-  <div class="wrap">
-    <a class="brand" href="/">MedSpa<em>Stack</em></a>
-    <nav>{nav.map(([h,l]) => <a href={h}>{l}</a>)}</nav>
+<header class="ms-header">
+  <div class="ms-header-in">
+    <a class="ms-wordmark" href="/">MedSpa<em>Stack</em></a>
+    <nav class="ms-nav">
+      {nav.map(([h, l]) => <a href={h} aria-current={path === h ? 'page' : undefined}>{l}</a>)}
+    </nav>
   </div>
 </header>
-<main class="wrap"><slot /></main>
-<footer class="site">
-  <div class="wrap">
-    <div class="row">
-      <a href="/about/">About</a>
-      <a href="/methodology/">How we test</a>
-      <a href="/disclosure/">Affiliate disclosure</a>
-      <a href="/pricing/">Pricing database</a>
+
+<div class="ms-page">
+  {crumbs && (
+    <nav class="ms-crumb">
+      <a href="/">Home</a>
+      {crumbs.map(c => Array.isArray(c)
+        ? <><span aria-hidden="true">/</span><a href={c[1]}>{c[0]}</a></>
+        : <><span aria-hidden="true">/</span><span>{c}</span></>)}
+    </nav>
+  )}
+  <main><slot /></main>
+</div>
+
+<footer class="ms-footer">
+  <div class="ms-page">
+    <div class="ms-footer-cols">
+      <div>
+        <p class="ms-kicker">MedSpaStack</p>
+        <p class="ms-measure">
+          Independent pricing and capability research on med spa and aesthetics practice
+          software. Every figure is read off the vendor's own published page and carries the
+          date it was verified.
+        </p>
+      </div>
+      <div>
+        <p class="ms-kicker">Research</p>
+        <p><a href="/pricing/">Pricing database</a></p>
+        <p><a href="/software/">All platforms</a></p>
+        <p><a href="/emr-vs-booking/">EMR or booking</a></p>
+        <p><a href="/cost-calculator/">Cost calculator</a></p>
+      </div>
+      <div>
+        <p class="ms-kicker">About</p>
+        <p><a href="/about/">Who runs this</a></p>
+        <p><a href="/methodology/">How we verify</a></p>
+        <p><a href="/disclosure/">Affiliate disclosure</a></p>
+      </div>
     </div>
-    <p class="fine">
-      MedSpaStack publishes independent pricing and feature research on med spa and aesthetics
-      practice software. We earn affiliate commissions from some vendors — every page carrying a
-      paid link says so, and our <a href="/disclosure/">disclosure page</a> names exactly which
-      vendors pay us. Commission never affects placement or scoring.
-    </p>
-    <p class="fine" style="margin:1rem 0 0;color:var(--faint)">
-      © 2026 MedSpaStack. Prices are collected from vendors' own public pages and carry the date
-      they were verified.
+    <p class="ms-disclosure">
+      We earn affiliate commission from some of the platforms listed here. Every page carrying a
+      paid link says so, and the <a href="/disclosure/">disclosure page</a> names exactly which
+      vendors pay us and which do not. Commission never affects placement, ordering or
+      classification. © 2026 MedSpaStack.
     </p>
   </div>
 </footer>

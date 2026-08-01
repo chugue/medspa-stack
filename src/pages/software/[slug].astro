@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { vendors, money, VERIFIED_LABEL, KLASS_LABEL, KLASS_NOTE, PAIRS, pairSlug, bySlug } from '../../data/site.js';
+import Stamp from '../../components/Stamp.astro';
+import { vendors, money, KLASS_LABEL, KLASS_NOTE, PAIRS, pairSlug, bySlug, badge, VERIFIED_LABEL } from '../../data/site.js';
 
 export function getStaticPaths() {
   return vendors.map(v => ({ params: { slug: v.slug }, props: { v } }));
@@ -9,111 +10,144 @@ const { v } = Astro.props;
 const related = PAIRS.filter(p => p.includes(v.slug));
 ---
 <Base
-  title={`${v.name} pricing and features (2026) — verified from their own page`}
-  description={`What ${v.name} costs, including setup fees and paid add-ons, plus whether it has genuine clinical charting. Verified ${VERIFIED_LABEL}.`}
+  title={`${v.displayName} pricing and features (2026) — verified from their own page`}
+  description={`What ${v.displayName} costs, including setup fees and paid add-ons, plus whether it has genuine clinical charting. Verified ${VERIFIED_LABEL}.`}
+  crumbs={[['Platforms', '/software/'], v.displayName]}
 >
-<div class="crumb"><a href="/">Home</a> → <a href="/software/">Software</a> → {v.name}</div>
-<h1>{v.name}</h1>
-
-<p class="lede">
-  <span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span>
-  {v.segment ? ` · ${v.segment}` : ''}
-</p>
-
-<div class="note">
-  <p>
-    {v.pricingPublic
-      ? <>Publishes pricing. Starting price {v.startingPrice != null ? <strong>{money(v.startingPrice)}/mo</strong> : 'listed by tier'}{v.setupFee ? <> plus a <strong>{money(v.setupFee)}</strong> one-time setup fee</> : ''}.</>
-      : <>Does not publish pricing — a sales call is required to get a quote.</>}
-    {v.freeTrial ? <> Free trial: {v.freeTrial}.</> : ''}
+<section class="ms-section">
+  <p class="ms-eyebrow">Platform</p>
+  <h1 class="ms-display">{v.displayName}</h1>
+  <p class="ms-lede ms-measure">
+    <span class={badge(v.klass)}>{KLASS_LABEL[v.klass]}</span>
+    {v.promo && <Fragment> <span class="ms-badge ms-badge-promo">Promo rate</span></Fragment>}
+    {v.segment && <Fragment><br />{v.segment}</Fragment>}
   </p>
-  <p class="stamp" style="margin-top:.5rem">
-    Verified {VERIFIED_LABEL} from
-    {v.pricingUrl ? <> <a href={v.pricingUrl} rel="nofollow noopener" target="_blank">the vendor's pricing page</a></> : <> the vendor's site</>}.
-  </p>
-</div>
+  <Stamp>
+    {v.pricingUrl
+      ? <Fragment>Read from <a href={v.pricingUrl} rel="nofollow noopener" target="_blank">the vendor's own pricing page</a>, rechecked weekly.</Fragment>
+      : <Fragment>Read from the vendor's own site, rechecked weekly.</Fragment>}
+  </Stamp>
+</section>
 
-{v.tiers?.length > 0 && (
-  <>
-    <h2>Published tiers</h2>
-    <div class="scroll">
-    <table>
-      <thead><tr><th>Tier</th><th class="num">Price</th><th>Billing basis</th><th>Includes</th></tr></thead>
-      <tbody>
-        {v.tiers.map(t => (
-          <tr>
-            <td><strong>{t.tier_name || '—'}</strong></td>
-            <td class="num">{t.monthly_price_usd != null ? money(t.monthly_price_usd) + '/mo' : 'Quote'}</td>
-            <td>{t.billing_note || '—'}</td>
-            <td>{t.what_it_includes || '—'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+<section class="ms-section">
+  <div class="ms-stats blueprint">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{v.startingPrice != null ? money(v.startingPrice) : '—'}</div>
+      <p class="ms-stat-cap">{v.startingPrice != null ? `Entry tier per month — ${v.entryTier}` : 'No published price; sales quote only'}</p>
     </div>
-  </>
-)}
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{v.setupFee ? money(v.setupFee) : 'None'}</div>
+      <p class="ms-stat-cap">Published one-time onboarding fee</p>
+    </div>
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{v.tiers?.length || '—'}</div>
+      <p class="ms-stat-cap">Named tiers disclosed publicly</p>
+    </div>
+    <div class="ms-stat">
+      <div class="ms-stat-fig" style="font-size:clamp(20px,2.4vw,30px)">{v.billingBasis === 'location' ? 'Per location' : v.billingBasis === 'user' ? 'Per user' : 'Flat'}</div>
+      <p class="ms-stat-cap">How the entry tier is billed</p>
+    </div>
+  </div>
+</section>
 
-{v.hiddenCosts && (
-  <>
-    <h2>What sits outside the headline price</h2>
-    <p>{v.hiddenCosts}</p>
-  </>
-)}
+{v.tiers?.length ? (
+  <section class="ms-section">
+    <p class="ms-kicker">Published tiers</p>
+    <h2 class="ms-h2">What each plan costs and includes</h2>
+    <div class="ms-scroller">
+      <table class="ms-data">
+        <thead>
+          <tr>
+            <th scope="col">Tier</th>
+            <th scope="col" class="num">Price</th>
+            <th scope="col">Billing basis</th>
+            <th scope="col">Includes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {v.tiers.map(t => (
+            <tr>
+              <td><span class="ms-cell-name">{t.tier_name || '—'}</span></td>
+              <td class="num num-strong">{t.monthly_price_usd != null ? money(t.monthly_price_usd) + '/mo' : <span class="nil">Quote</span>}</td>
+              <td class="prose">{t.billing_note || <span class="nil">—</span>}</td>
+              <td class="prose">{t.what_it_includes || <span class="nil">—</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+) : null}
 
-{v.processing && (
-  <>
-    <h3>Payment processing</h3>
-    <p>{v.processing}</p>
-  </>
-)}
+{v.hiddenCosts ? (
+  <section class="ms-section">
+    <div class="ms-callout ms-callout-caution">
+      <p class="ms-callout-title">What sits outside the headline price</p>
+      <p>{v.hiddenCosts}</p>
+    </div>
+  </section>
+) : null}
 
-<h2>Clinical capability</h2>
-<p>{v.clinical || 'Not verified.'}</p>
-<p class="stamp">{KLASS_NOTE[v.klass]}</p>
+<section class="ms-section">
+  <h2 class="ms-h2">Clinical capability</h2>
+  <p class="ms-measure">{v.clinical || 'Not verified.'}</p>
+  <p class="ms-measure ms-stamp-note">{KLASS_NOTE[v.klass]}</p>
 
-{v.hipaa && (
-  <>
-    <h2>HIPAA</h2>
-    <p>{v.hipaa}</p>
-    <p class="stamp">
+  {v.processing && (<Fragment>
+    <h3 class="ms-h3">Payment processing</h3>
+    <p class="ms-measure">{v.processing}</p>
+  </Fragment>)}
+
+  {v.hipaa && (<Fragment>
+    <h3 class="ms-h3">HIPAA</h3>
+    <p class="ms-measure">{v.hipaa}</p>
+    <p class="ms-measure ms-stamp-note">
       We record what the vendor states publicly. A published compliance claim is not the same as a
       signed business associate agreement — ask for the BAA in writing before you migrate patient
       data.
     </p>
-  </>
-)}
+  </Fragment>)}
 
-{related.length > 0 && (
-  <>
-    <h2>Compared with</h2>
-    <div class="cards">
+  {v.freeTrial && (<Fragment>
+    <h3 class="ms-h3">Trial</h3>
+    <p class="ms-measure">{v.freeTrial}</p>
+  </Fragment>)}
+</section>
+
+{related.length ? (
+  <section class="ms-section">
+    <p class="ms-kicker">Head to head</p>
+    <h2 class="ms-h2">{v.displayName} compared</h2>
+    <div class="ms-grid">
       {related.map(p => {
-        const other = bySlug[p.find(s => s !== v.slug)];
-        return other ? (
-          <a class="card" href={`/compare/${pairSlug(p)}/`}>
-            <div class="n">{bySlug[p[0]]?.name} vs {bySlug[p[1]]?.name}</div>
-            <div class="p">Side-by-side pricing and clinical capability</div>
+        const a = bySlug[p[0]], b = bySlug[p[1]];
+        return a && b && (
+          <a class="ms-linkcard" href={`/compare/${pairSlug(p)}/`}>
+            <span class="ms-linkcard-title">{a.displayName} vs {b.displayName}</span>
+            <p class="ms-linkcard-desc">Published pricing, billing basis and clinical capability, side by side.</p>
+            <span class="ms-linkcard-meta">Comparison</span>
           </a>
-        ) : null;
+        );
       })}
     </div>
-  </>
-)}
+  </section>
+) : null}
 
-<hr />
-<div class="note">
-  <p>
-    <strong>Correction policy.</strong> {v.name} can change its pricing at any time without telling
-    us. If what you were quoted differs from what is above, that is a defect on our side and we
-    want the detail — <a href="/about/">send it over</a> and we will recheck and republish with a
-    new date. We do not remove unflattering facts at a vendor's request; we do correct wrong ones
-    immediately.
-  </p>
-</div>
-
-<p class="stamp">
-  <a href={v.url} rel="nofollow noopener" target="_blank">{v.name}'s official site</a> ·
-  <a href="/disclosure/">Do we earn a commission from {v.name}?</a>
-</p>
+<section class="ms-section">
+  <div class="ms-callout">
+    <p class="ms-callout-title">Correction policy</p>
+    <p>
+      {v.displayName} can change its pricing at any time without telling us. If what you were quoted
+      differs from what is above, that is a defect on our side and we want the detail —
+      <a href="/about/">send it over</a> and we will recheck and republish with a new date. We do
+      not remove unflattering facts at a vendor's request; we do correct wrong ones immediately.
+    </p>
+    <p>
+      <a href={v.url} rel="nofollow noopener" target="_blank">{v.displayName}'s official site</a>
+      {' · '}
+      <a href="/disclosure/">Do we earn a commission from {v.displayName}?</a>
+    </p>
+  </div>
+</section>
 </Base>

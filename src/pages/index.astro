@@ -1,133 +1,194 @@
 ---
 import Base from '../layouts/Base.astro';
-import { vendors, priced, money, VERIFIED_LABEL, KLASS_LABEL } from '../data/site.js';
+import Stamp from '../components/Stamp.astro';
+import { vendors, priced, money, KLASS_LABEL, PAIRS, pairSlug, bySlug, badge } from '../data/site.js';
 
 const emr = vendors.filter(v => v.klass === 'emr');
 const booking = vendors.filter(v => v.klass === 'booking');
 const promo = vendors.filter(v => v.promo);
-const cheapest = priced.slice(0, 6);
+const quoteOnly = vendors.filter(v => !v.pricingPublic);
+const cheapest = priced.slice(0, 7);
+const featured = PAIRS.slice(0, 3);
 ---
 <Base
   title="MedSpaStack — independent pricing research on med spa software"
-  description="Verified pricing, hidden fees and clinical-capability data for 24 med spa and aesthetics practice management platforms. Read from vendor pages, dated, rechecked weekly."
+  description={`Verified pricing, hidden fees and clinical-capability data for ${vendors.length} med spa and aesthetics platforms. Read from vendor pages, dated, rechecked weekly.`}
 >
-<p class="eyebrow" style="margin-top:2.6rem">Independent research · verified {VERIFIED_LABEL}</p>
-<h1 style="max-width:16ch">What med spa software actually costs</h1>
-
-<p class="lede">
-  We track published pricing, setup fees and add-on charges across {vendors.length} med spa and
-  aesthetics platforms — and record which ones have real medical charting versus which are booking
-  systems wearing a clinical label. Every number carries the date we read it off the vendor's own
-  page.
-</p>
-
-<div class="stats">
-  <div class="stat">
-    <b>{vendors.length}</b>
-    <span>platforms tracked</span>
-  </div>
-  <div class="stat">
-    <b>{priced.length}</b>
-    <span>publish a price at all</span>
-  </div>
-  <div class="stat">
-    <b>{promo.length}</b>
-    <span>quote a promo or annual-prepay rate</span>
-  </div>
-  <div class="stat">
-    <b>{booking.length}</b>
-    <span>have no medical charting</span>
-  </div>
-</div>
-
-<div class="note accent">
-  <p>
-    <strong>Why this site exists.</strong> Advertised starting prices in this category are close to
-    meaningless. Several platforms bill per location or per user rather than per business, five
-    quote a promotional or annual-prepay rate as if it were standard, and nearly every one charges
-    separately for the things a med spa actually needs — charting, e-prescribing, forms, marketing.
-    We publish the whole bill, not the headline.
+<section class="ms-section">
+  <p class="ms-eyebrow">Independent research</p>
+  <h1 class="ms-display">What med spa software actually costs</h1>
+  <p class="ms-lede ms-measure">
+    We track published pricing, setup fees and add-on charges across {vendors.length} med spa and
+    aesthetics platforms — and record which ones have real medical charting versus which are
+    booking systems wearing a clinical label. Every number carries the date we read it off the
+    vendor's own page.
   </p>
-</div>
+  <Stamp />
+</section>
 
-<h2>Start here</h2>
-<div class="cards">
-  <a class="card" href="/pricing/">
-    <div class="n">The pricing database</div>
-    <div class="p">All {vendors.length} platforms, every published tier, setup fees and add-on costs in one table.</div>
-  </a>
-  <a class="card" href="/emr-vs-booking/">
-    <div class="n">EMR or booking system?</div>
-    <div class="p">{emr.length} have real medical charting. {booking.length} have none. The decision most buyers get wrong first.</div>
-  </a>
-  <a class="card" href="/cost-calculator/">
-    <div class="n">Real cost calculator</div>
-    <div class="p">Enter your locations and providers. See the twelve-month total, not the sticker price.</div>
-  </a>
-  <a class="card" href="/methodology/">
-    <div class="n">How we collect this</div>
-    <div class="p">Where the numbers come from, what we refuse to score, and who pays us.</div>
-  </a>
-</div>
+<section class="ms-section">
+  <div class="ms-stats blueprint">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{vendors.length}</div>
+      <p class="ms-stat-cap">Platforms tracked, rechecked weekly</p>
+    </div>
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{priced.length}</div>
+      <p class="ms-stat-cap">Publish a price at all — the other {quoteOnly.length} quote only</p>
+    </div>
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{emr.length}</div>
+      <p class="ms-stat-cap">Have real medical charting, not a booking system with a clinical label</p>
+    </div>
+    <div class="ms-stat">
+      <div class="ms-stat-fig">{promo.length}</div>
+      <p class="ms-stat-cap">Quote a promotional or annual-prepay rate as if it were standard</p>
+    </div>
+  </div>
+</section>
 
-<h2>Lowest published starting prices</h2>
-<p class="prose">
-  Sorted by advertised entry price. Read the billing basis before drawing conclusions — several of
-  these are per user or per location, which changes the arithmetic entirely once you have a team.
-</p>
+<section class="ms-section">
+  <div class="ms-callout ms-callout-accent">
+    <p class="ms-callout-title">Why this site exists</p>
+    <p>
+      Advertised starting prices in this category are close to meaningless. Several platforms bill
+      per location or per user rather than per business, {promo.length} quote a promotional or
+      annual-prepay rate as if it were standard, and nearly every one charges separately for the
+      things a med spa actually needs — charting, e-prescribing, forms, marketing. We publish the
+      whole bill, not the headline.
+    </p>
+  </div>
+</section>
 
-<div class="scroll">
-<table>
-  <thead>
-    <tr><th>Platform</th><th>Type</th><th class="num">From</th><th>Billing basis</th><th class="num">Setup</th></tr>
-  </thead>
-  <tbody>
-    {cheapest.map(v => (
-      <tr>
-        <td><a href={`/software/${v.slug}/`}>{v.displayName}</a></td>
-        <td><span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span></td>
-        <td class="num">{money(v.startingPrice)}/mo</td>
-        <td>{(v.entryNote || '—').split(';')[0]}</td>
-        <td class="num">{v.setupFee ? money(v.setupFee) : '—'}</td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-</div>
-<p><a href="/pricing/">See all {vendors.length} platforms →</a></p>
+<section class="ms-section">
+  <p class="ms-kicker">Lowest published starting prices</p>
+  <h2 class="ms-h2">Sticker prices, and what they leave out</h2>
+  <p class="ms-measure">
+    Sorted by advertised entry price. Read the billing basis before drawing conclusions — several
+    of these are per user or per location, which changes the arithmetic entirely once you have a
+    team.
+  </p>
 
-<h2>The three most expensive assumptions</h2>
+  <div class="ms-scroller">
+    <table class="ms-data ms-data-sticky">
+      <thead>
+        <tr>
+          <th scope="col">Platform</th>
+          <th scope="col">Type</th>
+          <th scope="col" class="num">From</th>
+          <th scope="col">Billing basis</th>
+          <th scope="col" class="num">Setup</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cheapest.map(v => (
+          <tr>
+            <td>
+              <span class="ms-cell-name"><a href={`/software/${v.slug}/`}>{v.displayName}</a></span>
+              {v.promo && <span class="ms-cell-flags"><span class="ms-badge ms-badge-promo">Promo rate</span></span>}
+            </td>
+            <td><span class={badge(v.klass)}>{KLASS_LABEL[v.klass]}</span></td>
+            <td class="num num-strong">{money(v.startingPrice)}/mo</td>
+            <td class="prose">{(v.entryNote || '—').split(';')[0]}</td>
+            <td class="num">{v.setupFee ? money(v.setupFee) : <span class="nil">—</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="ms-scrollnote">Showing {cheapest.length} of {vendors.length}. <a href="/pricing/">See the full pricing database →</a></p>
+</section>
 
-<div class="prose">
-<h3>1. That the advertised price is per business</h3>
-<p>
-  It usually is not. Boulevard, Mangomint, Mindbody and Square Appointments price
-  <em>per location</em>. Aesthetic Record and Fresha price <em>per user</em> — Aesthetic Record's
-  $15 entry tier becomes $90 a month for a six-person clinic before a single add-on, and it carries
-  a $399 onboarding fee that appears nowhere near the headline. Two platforms with similar sticker
-  prices can differ threefold on the invoice.
-</p>
+<section class="ms-section">
+  <p class="ms-kicker">Start here</p>
+  <h2 class="ms-h2">Three things worth knowing before you shortlist</h2>
+  <div class="ms-grid">
+    <a class="ms-linkcard" href="/emr-vs-booking/">
+      <span class="ms-linkcard-title">Booking system or EMR?</span>
+      <p class="ms-linkcard-desc">
+        {emr.length} of these platforms have genuine medical charting. {booking.length} have none at
+        all. Buying across that line is how practices end up paying for two systems.
+      </p>
+      <span class="ms-linkcard-meta">Guide</span>
+    </a>
+    <a class="ms-linkcard" href="/pricing/">
+      <span class="ms-linkcard-title">The pricing database</span>
+      <p class="ms-linkcard-desc">
+        Every published tier, onboarding fee and add-on charge for all {vendors.length} platforms,
+        with the source and date for each.
+      </p>
+      <span class="ms-linkcard-meta">Data</span>
+    </a>
+    <a class="ms-linkcard" href="/cost-calculator/">
+      <span class="ms-linkcard-title">What will it cost you?</span>
+      <p class="ms-linkcard-desc">
+        Per-location and per-user pricing converted onto one basis for your practice shape, with
+        onboarding folded into year one.
+      </p>
+      <span class="ms-linkcard-meta">Tool</span>
+    </a>
+  </div>
+</section>
 
-<h3>2. That clinical charting is included</h3>
-<p>
-  Fresha, Vagaro, Square Appointments, WellnessLiving, Mindbody and Booker have no medical charting
-  at all. They are excellent booking systems. If you inject, laser or prescribe, you will be buying
-  a second system — a cost that rarely appears in any comparison table.
-  <a href="/emr-vs-booking/">We sorted every platform on this axis.</a>
-</p>
+<section class="ms-section">
+  <p class="ms-kicker">Head to head</p>
+  <h2 class="ms-h2">Recent comparisons</h2>
+  <div class="ms-grid">
+    {featured.map(p => {
+      const a = bySlug[p[0]], b = bySlug[p[1]];
+      return a && b && (
+        <a class="ms-linkcard" href={`/compare/${pairSlug(p)}/`}>
+          <span class="ms-linkcard-title">{a.displayName} vs {b.displayName}</span>
+          <p class="ms-linkcard-desc">
+            {a.pricingPublic !== b.pricingPublic
+              ? 'One publishes a price and the other does not — what that asymmetry costs you in a buying cycle.'
+              : 'Published pricing, billing basis and clinical capability, side by side.'}
+          </p>
+          <span class="ms-linkcard-meta">Comparison</span>
+        </a>
+      );
+    })}
+  </div>
+</section>
 
-<h3>3. That the annual price is the price</h3>
-<p>
-  Most published rates here assume annual prepayment, and several are promotional. Boulevard's
-  listed $140 tier is a summer promotion against a $176 standard rate, on annual billing, per
-  location. We record the standard rate alongside the promotional one.
-</p>
-</div>
+<section class="ms-section">
+  <p class="ms-kicker">The three most expensive assumptions</p>
 
-<hr />
-<p class="stamp prose">
-  Pricing last verified {VERIFIED_LABEL} against each vendor's own published pricing page. Vendors
-  change prices without notice; an automated pass rechecks weekly and every figure carries its
-  date. Spotted something stale or wrong? <a href="/about/">Tell us</a> — corrections get published.
-</p>
+  <h3 class="ms-h3">1. That the advertised price is per business</h3>
+  <p class="ms-measure">
+    It usually is not. Boulevard, Mangomint, Mindbody and Square Appointments price
+    <em>per location</em>. Aesthetic Record and Fresha price <em>per user</em> — Aesthetic Record's
+    $15 entry tier becomes $90 a month for a six-person clinic before a single add-on, and it
+    carries a $399 onboarding fee that appears nowhere near the headline. Two platforms with
+    similar sticker prices can differ threefold on the invoice.
+  </p>
+
+  <h3 class="ms-h3">2. That clinical charting is included</h3>
+  <p class="ms-measure">
+    Fresha, Vagaro, Square Appointments, WellnessLiving, Mindbody and Booker have no medical
+    charting at all. They are excellent booking systems. If you inject, laser or prescribe, you
+    will be buying a second system — a cost that rarely appears in any comparison table.
+    <a href="/emr-vs-booking/">We sorted every platform on this axis.</a>
+  </p>
+
+  <h3 class="ms-h3">3. That the annual price is the price</h3>
+  <p class="ms-measure">
+    Most published rates here assume annual prepayment, and several are promotional. Boulevard's
+    listed $140 tier is a summer promotion against a $176 standard rate, on annual billing, per
+    location. We record the standard rate alongside the promotional one.
+  </p>
+</section>
+
+<section class="ms-section">
+  <div class="ms-callout">
+    <p class="ms-callout-title">Corrections</p>
+    <p>
+      Vendors change prices without notice, and a stale figure is worse than no figure. If what you
+      were quoted differs from what we publish, that is a defect on our side —
+      <a href="/about/">send it over</a> and we will re-read the source and republish with a new
+      verification date.
+    </p>
+  </div>
+</section>
 </Base>

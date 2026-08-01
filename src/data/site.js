@@ -47,3 +47,22 @@ export const PAIRS = [
 export function pairSlug([a, b]) {
   return `${a}-vs-${b}`;
 }
+
+// Map our internal class names onto the design system's badge modifiers.
+export const BADGE = {
+  emr: 'ms-badge-emr',
+  booking: 'ms-badge-booking',
+  hybrid: 'ms-badge-hybrid',
+  adjacent: 'ms-badge-addon',
+  unclear: 'ms-badge-unverified',
+};
+export function badge(k) { return `ms-badge ${BADGE[k] || 'ms-badge-unverified'}`; }
+
+// Readable noun phrases for prose, so comparison copy reads correctly.
+export const KLASS_PHRASE = {
+  emr: 'a clinical EMR',
+  booking: 'a booking and POS system with no medical charting',
+  hybrid: 'a hybrid — a booking core with charting on higher tiers',
+  adjacent: 'an add-on tool rather than a practice management system',
+  unclear: 'a platform whose clinical capability we could not verify from public documentation',
+};

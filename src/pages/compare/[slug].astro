@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { vendors, bySlug, money, VERIFIED_LABEL, KLASS_LABEL, PAIRS, pairSlug } from '../../data/site.js';
+import Stamp from '../../components/Stamp.astro';
+import { vendors, bySlug, money, KLASS_LABEL, KLASS_PHRASE, PAIRS, pairSlug, badge, VERIFIED_LABEL } from '../../data/site.js';
 
 export function getStaticPaths() {
   return PAIRS
@@ -9,112 +10,153 @@ export function getStaticPaths() {
 }
 const { a, b } = Astro.props;
 
+// win: which side is the more transparent / lower-cost answer on that row, where that is meaningful
 const rows = [
-  ['Type', v => KLASS_LABEL[v.klass]],
-  ['Publishes pricing', v => v.pricingPublic ? 'Yes' : 'No — quote only'],
-  ['Starting price', v => v.startingPrice != null ? money(v.startingPrice) + '/mo' : 'Not published'],
-  ['Entry tier', v => v.entryTier || '—'],
-  ['Billing basis', v => (v.entryNote || '—').split(';')[0]],
-  ['One-time setup fee', v => v.setupFee ? money(v.setupFee) : 'None published'],
-  ['Free trial', v => v.freeTrial || 'Not published'],
-  ['Named tiers', v => v.tiers?.length ? v.tiers.map(t => t.tier_name).filter(Boolean).join(', ') : '—'],
-  ['Target segment', v => v.segment || '—'],
-  ['Payment processing', v => v.processing || 'Not published'],
+  ['Published price',
+    v => v.startingPrice != null ? `${money(v.startingPrice)}/mo` : 'None. Sales quote only.',
+    v => v.pricingPublic && (!a.pricingPublic || !b.pricingPublic)],
+  ['Entry tier', v => v.entryTier || '—', () => false],
+  ['Billing basis', v => (v.entryNote || '—').split(';')[0], () => false],
+  ['One-time setup fee', v => v.setupFee ? money(v.setupFee) : 'None published',
+    v => !v.setupFee && (a.setupFee || b.setupFee)],
+  ['Free trial', v => v.freeTrial || 'Not published', () => false],
+  ['Named tiers', v => v.tiers?.length ? v.tiers.map(t => t.tier_name).filter(Boolean).join(', ') : '—', () => false],
+  ['Target segment', v => v.segment || '—', () => false],
+  ['Payment processing', v => v.processing || 'Not published', () => false],
 ];
 
 const differentClass = a.klass !== b.klass;
 const onePriced = a.pricingPublic !== b.pricingPublic;
 ---
 <Base
-  title={`${a.name} vs ${b.name} (2026) — pricing and clinical capability compared`}
-  description={`A side-by-side of ${a.name} and ${b.name}: published pricing, setup fees, billing basis and whether each has genuine medical charting. Verified ${VERIFIED_LABEL}.`}
+  title={`${a.displayName} vs ${b.displayName} (2026) — pricing and clinical capability compared`}
+  description={`A side-by-side of ${a.displayName} and ${b.displayName}: published pricing, setup fees, billing basis and whether each has genuine medical charting. Verified ${VERIFIED_LABEL}.`}
+  crumbs={[['Platforms', '/software/'], `${a.displayName} vs ${b.displayName}`]}
 >
-<div class="crumb"><a href="/">Home</a> → <a href="/software/">Software</a> → {a.name} vs {b.name}</div>
-<h1>{a.name} vs {b.name}</h1>
-
-<p class="lede">
-  Verified pricing and capability, read from each vendor's own published material on
-  {' '}{VERIFIED_LABEL}. We do not score these out of ten — the right answer depends on whether you
-  chart treatments and how your team is shaped.
-</p>
+<section class="ms-section">
+  <p class="ms-eyebrow">Comparison</p>
+  <h1 class="ms-display">{a.displayName} vs {b.displayName}</h1>
+  <p class="ms-lede ms-measure">
+    Verified pricing and capability, read from each vendor's own published material. We do not
+    score these out of ten — the right answer depends on whether you chart treatments and how your
+    team is shaped.
+  </p>
+  <Stamp />
+</section>
 
 {differentClass && (
-  <div class="note accent">
-    <p>
-      <strong>These are not the same kind of product.</strong> {a.name} is a
-      {' '}{KLASS_LABEL[a.klass].toLowerCase()}; {b.name} is a {KLASS_LABEL[b.klass].toLowerCase()}.
-      Before comparing price, work out which category your practice needs —
-      <a href="/emr-vs-booking/">we sorted all {vendors.length} platforms on that axis</a>.
-      Choosing on price across this line is how practices end up paying for two systems.
-    </p>
-  </div>
+  <section class="ms-section">
+    <div class="ms-callout ms-callout-accent">
+      <p class="ms-callout-title">These are not the same kind of product</p>
+      <p>
+        {a.displayName} is {KLASS_PHRASE[a.klass]}. {b.displayName} is {KLASS_PHRASE[b.klass]}.
+        Before comparing price, work out which category your practice needs —
+        <a href="/emr-vs-booking/">we sorted all {vendors.length} platforms on that axis</a>.
+        Choosing on price across this line is how practices end up paying for two systems.
+      </p>
+    </div>
+  </section>
 )}
 
-<div class="scroll">
-<table>
-  <thead><tr><th></th><th>{a.name}</th><th>{b.name}</th></tr></thead>
-  <tbody>
-    {rows.map(([label, fn]) => (
-      <tr><th style="background:#fff">{label}</th><td>{fn(a)}</td><td>{fn(b)}</td></tr>
-    ))}
-  </tbody>
-</table>
-</div>
+<section class="ms-section">
+  <div class="ms-scroller">
+    <table class="ms-compare">
+      <thead>
+        <tr>
+          <th scope="col"><span class="ms-kicker" style="margin:0">Criterion</span></th>
+          <th scope="col">
+            <span class="ms-compare-vendor">{a.displayName}</span>
+            <span class={badge(a.klass)} style="margin-top:8px">{KLASS_LABEL[a.klass]}</span>
+          </th>
+          <th scope="col">
+            <span class="ms-compare-vendor">{b.displayName}</span>
+            <span class={badge(b.klass)} style="margin-top:8px">{KLASS_LABEL[b.klass]}</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map(([label, fn, win]) => (
+          <tr>
+            <th scope="row">{label}</th>
+            <td class={win(a) ? 'ms-win' : (fn(a) || '').startsWith('None') || (fn(a) || '').startsWith('Not') ? 'nil' : ''}>{fn(a)}</td>
+            <td class={win(b) ? 'ms-win' : (fn(b) || '').startsWith('None') || (fn(b) || '').startsWith('Not') ? 'nil' : ''}>{fn(b)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
 
 {onePriced && (
-  <div class="note">
-    <p>
-      One of these publishes pricing and the other does not, which makes a direct cost comparison
-      impossible without a sales call. That asymmetry is worth weighing on its own: a vendor that
-      publishes rates is one you can budget against before committing your time to a demo cycle.
-    </p>
-  </div>
+  <section class="ms-section">
+    <div class="ms-callout">
+      <p class="ms-callout-title">One of these will not tell you the price</p>
+      <p>
+        That makes a direct cost comparison impossible without a sales call, and the asymmetry is
+        worth weighing on its own. A vendor that publishes rates is one you can budget against
+        before committing your time to a demo cycle.
+      </p>
+    </div>
+  </section>
 )}
 
-<h2>Clinical capability, side by side</h2>
-<h3>{a.name}</h3>
-<p>{a.clinical || 'Not verified.'}</p>
-<h3>{b.name}</h3>
-<p>{b.clinical || 'Not verified.'}</p>
+<section class="ms-section">
+  <p class="ms-kicker">Clinical capability</p>
+  <h2 class="ms-h2">What each one does in the treatment room</h2>
+  <h3 class="ms-h3">{a.displayName}</h3>
+  <p class="ms-measure">{a.clinical || 'Not verified.'}</p>
+  <h3 class="ms-h3">{b.displayName}</h3>
+  <p class="ms-measure">{b.clinical || 'Not verified.'}</p>
+</section>
 
-<h2>Costs outside the headline price</h2>
-{[a, b].map(v => v.hiddenCosts && (
-  <>
-    <h3>{v.name}</h3>
-    <p>{v.hiddenCosts}</p>
-  </>
-))}
+<section class="ms-section">
+  <p class="ms-kicker">Beyond the sticker</p>
+  <h2 class="ms-h2">Costs outside the headline price</h2>
+  <div class="ms-stack">
+    {[a, b].map(v => v.hiddenCosts && (
+      <div class="ms-callout ms-callout-caution">
+        <p class="ms-callout-title">{v.displayName}</p>
+        <p>{v.hiddenCosts}</p>
+      </div>
+    ))}
+  </div>
+</section>
 
-<h2>How to decide</h2>
-<ol>
-  <li>
-    Settle the category question first. If you document procedures, a booking-only platform is not
-    a candidate at any price.
-  </li>
-  <li>
-    Convert both to <em>your</em> shape — locations and providers — rather than comparing sticker
-    prices. Per-location and per-user models diverge sharply once you are past a solo practice.
+<section class="ms-section">
+  <h2 class="ms-h2">How to decide</h2>
+  <h3 class="ms-h3">Settle the category question first</h3>
+  <p class="ms-measure">
+    If you document procedures, a booking-only platform is not a candidate at any price.
+  </p>
+  <h3 class="ms-h3">Convert both to your shape</h3>
+  <p class="ms-measure">
+    Compare locations and providers rather than sticker prices. Per-location and per-user models
+    diverge sharply once you are past a solo practice.
     <a href="/cost-calculator/">The calculator does this.</a>
-  </li>
-  <li>
-    Add the modules you will actually turn on. In this category, forms, e-prescribing, marketing
-    and text messaging are frequently separate line items.
-  </li>
-  <li>
-    Ask each vendor to demonstrate charting with your own treatment types, and get the BAA in
-    writing before migrating patient data.
-  </li>
-</ol>
+  </p>
+  <h3 class="ms-h3">Add the modules you will actually turn on</h3>
+  <p class="ms-measure">
+    In this category, forms, e-prescribing, marketing and text messaging are frequently separate
+    line items rather than plan features.
+  </p>
+  <h3 class="ms-h3">Make them demonstrate charting with your treatments</h3>
+  <p class="ms-measure">
+    And get the BAA in writing before migrating any patient data.
+  </p>
+</section>
 
-<div class="cards">
-  <a class="card" href={`/software/${a.slug}/`}><div class="n">{a.name} in full</div><div class="p">All tiers, fees and verification sources</div></a>
-  <a class="card" href={`/software/${b.slug}/`}><div class="n">{b.name} in full</div><div class="p">All tiers, fees and verification sources</div></a>
-</div>
-
-<hr />
-<p class="stamp">
-  Verified {VERIFIED_LABEL}. We earn affiliate commission from some vendors and not others; that
-  has no bearing on the ordering or content of this page.
-  <a href="/disclosure/">See exactly who pays us</a>.
-</p>
+<section class="ms-section">
+  <div class="ms-grid">
+    <a class="ms-linkcard" href={`/software/${a.slug}/`}>
+      <span class="ms-linkcard-title">{a.displayName} in full</span>
+      <p class="ms-linkcard-desc">All tiers, fees and verification sources.</p>
+      <span class="ms-linkcard-meta">Platform</span>
+    </a>
+    <a class="ms-linkcard" href={`/software/${b.slug}/`}>
+      <span class="ms-linkcard-title">{b.displayName} in full</span>
+      <p class="ms-linkcard-desc">All tiers, fees and verification sources.</p>
+      <span class="ms-linkcard-meta">Platform</span>
+    </a>
+  </div>
+</section>
 </Base>

@@ -5,18 +5,19 @@ import { vendors, VERIFIED_LABEL } from '../data/site.js';
 <Base
   title="Affiliate disclosure — exactly who pays MedSpaStack"
   description="A named list of which med spa software vendors pay us commission and which do not, and how we keep that out of the research."
+  crumbs={["Affiliate disclosure"]}
 >
-<div class="crumb"><a href="/">Home</a> → Disclosure</div>
-<h1>Affiliate disclosure</h1>
+<p class="ms-eyebrow">Transparency</p>
+<h1 class="ms-display">Affiliate disclosure</h1>
 
-<p class="lede">
+<p class="ms-lede ms-measure">
   MedSpaStack earns affiliate commission from some of the software vendors covered on this site.
   This page names them. Most disclosures in this category are a single sentence in a footer; we
   think you are entitled to the list.
 </p>
 
-<div class="note accent">
-  <p>
+<div class="ms-callout ms-callout-accent">
+  <p class="ms-measure">
     <strong>Current status, {VERIFIED_LABEL}:</strong> MedSpaStack is newly launched and does not
     yet have an active affiliate relationship with any vendor. Applications are in progress. This
     page will be updated with the specific vendors, and the date each relationship began, before
@@ -24,7 +25,7 @@ import { vendors, VERIFIED_LABEL } from '../data/site.js';
   </p>
 </div>
 
-<h2>The rules we hold ourselves to</h2>
+<h2 class="ms-h2">The rules we hold ourselves to</h2>
 <ul>
   <li>
     <strong>Every vendor is listed here</strong> — paying and non-paying — so you can see the
@@ -51,13 +52,13 @@ import { vendors, VERIFIED_LABEL } from '../data/site.js';
   </li>
 </ul>
 
-<h2>All platforms we cover</h2>
-<p>
+<h2 class="ms-h2">All platforms we cover</h2>
+<p class="ms-measure">
   As relationships begin, the right-hand column will change from "None" to the program name and
   start date.
 </p>
-<div class="scroll">
-<table>
+<div class="ms-scroller">
+<table class="ms-data">
   <thead><tr><th>Platform</th><th>Commercial relationship</th></tr></thead>
   <tbody>
     {vendors.map(v => (
@@ -70,20 +71,20 @@ import { vendors, VERIFIED_LABEL } from '../data/site.js';
 </table>
 </div>
 
-<h2>Why we are this specific about it</h2>
-<p>
+<h2 class="ms-h2">Why we are this specific about it</h2>
+<p class="ms-measure">
   In med spa software, the most established "independent" comparison resources have real commercial
   ties to platforms they review — in at least one prominent case, the founder holds a senior role at
   a vendor covered on the site. That is disclosed, but it is disclosed in a way most readers will
   never encounter.
 </p>
-<p>
+<p class="ms-measure">
   We are not claiming to be purer than anyone. We take affiliate money and we intend to take more
   of it. The difference we are trying to hold is that you should be able to see the whole incentive
   structure on one page, in one table, without having to look anyone up.
 </p>
 
-<p class="stamp">
+<p class="ms-stamp-note">
   Questions about any of this: hello@medspastack.net ·
   <a href="/methodology/">Full methodology</a>
 </p>

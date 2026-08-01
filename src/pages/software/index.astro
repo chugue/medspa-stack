@@ -1,31 +1,55 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { vendors, money, VERIFIED_LABEL, KLASS_LABEL } from '../../data/site.js';
+import Stamp from '../../components/Stamp.astro';
+import { vendors, money, KLASS_LABEL, badge } from '../../data/site.js';
+
+const groups = [
+  ['emr', 'Clinical EMR'],
+  ['hybrid', 'Hybrid'],
+  ['booking', 'Booking / POS'],
+  ['adjacent', 'Add-on tools'],
+  ['unclear', 'Unverified'],
+];
 ---
 <Base
   title="All med spa software platforms we track (2026)"
-  description="Every med spa and aesthetics practice management platform in our database, with starting price, type and setup fee."
+  description={`Every med spa and aesthetics practice management platform in our database — ${vendors.length} in total — with starting price, type and setup fee.`}
+  crumbs={['Platforms']}
 >
-<div class="crumb"><a href="/">Home</a> → Software</div>
-<h1>Every platform we track</h1>
-<p class="lede">
-  {vendors.length} med spa and aesthetics platforms. Each page carries the vendor's published
-  pricing, the fees that sit outside it, and our read on whether the product has genuine clinical
-  charting. Sorted by published starting price.
-</p>
+<section class="ms-section">
+  <p class="ms-eyebrow">Index</p>
+  <h1 class="ms-display">Every platform we track</h1>
+  <p class="ms-lede ms-measure">
+    {vendors.length} med spa and aesthetics platforms. Each page carries the vendor's published
+    pricing, the fees that sit outside it, and our read on whether the product has genuine clinical
+    charting. Grouped by what kind of product it actually is.
+  </p>
+  <Stamp small />
+</section>
 
-<div class="cards">
-  {vendors.map(v => (
-    <a class="card" href={`/software/${v.slug}/`}>
-      <div class="n">{v.displayName}</div>
-      <div class="p">
-        <span class={`tag ${v.klass}`}>{KLASS_LABEL[v.klass]}</span>
-        {' '}{v.startingPrice != null ? `from ${money(v.startingPrice)}/mo` : 'quote only'}
-        {v.setupFee ? ` · ${money(v.setupFee)} setup` : ''}
+{groups.map(([k, label]) => {
+  const list = vendors.filter(v => v.klass === k);
+  return list.length > 0 && (
+    <section class="ms-section">
+      <p class="ms-kicker">{label}</p>
+      <h2 class="ms-h2">{list.length} platform{list.length > 1 ? 's' : ''}</h2>
+      <div class="ms-grid">
+        {list.map(v => (
+          <a class="ms-linkcard" href={`/software/${v.slug}/`}>
+            <span class="ms-linkcard-title">{v.displayName}</span>
+            <p class="ms-linkcard-desc">
+              {v.startingPrice != null
+                ? `From ${money(v.startingPrice)}/mo${v.setupFee ? ` plus ${money(v.setupFee)} onboarding` : ''}. ${(v.entryNote || '').split(';')[0]}`
+                : 'No published pricing — a sales call is required to get a quote.'}
+            </p>
+            <span class="ms-linkcard-meta">
+              <span class={badge(v.klass)}>{KLASS_LABEL[v.klass]}</span>
+              {v.promo && <> <span class="ms-badge ms-badge-promo">Promo rate</span></>}
+            </span>
+          </a>
+        ))}
       </div>
-    </a>
-  ))}
-</div>
-
-<p class="stamp">Last verified {VERIFIED_LABEL}. <a href="/methodology/">How we collect this</a>.</p>
+    </section>
+  );
+})}
 </Base>
