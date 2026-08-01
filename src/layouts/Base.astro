@@ -20,8 +20,7 @@ const path = Astro.url.pathname;
 <title>{title}</title>
 <meta name="description" content={description} />
 {noindex && <meta name="robots" content="noindex" />}
-<meta name="theme-color" content="#f2f2f3" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#1d1f20" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#f2f2f3" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
@@ -31,6 +30,16 @@ const path = Astro.url.pathname;
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="preload" href="/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin />
+<script is:inline>
+  // Runs before first paint so the page never flashes the wrong theme.
+  // Light is the default; the OS preference is only honoured if the visitor
+  // has never chosen for themselves.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('ms-theme'); } catch (e) {}
+    document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
+  })();
+</script>
 </head>
 <body>
 <header class="ms-header">
@@ -39,8 +48,62 @@ const path = Astro.url.pathname;
     <nav class="ms-nav">
       {nav.map(([h, l]) => <a href={h} aria-current={path === h ? 'page' : undefined}>{l}</a>)}
     </nav>
+    <button type="button" id="ms-theme-toggle" class="ms-themebtn" aria-live="polite">
+      <svg class="ms-theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.2"></circle>
+        <path d="M12 2.4v2.2M12 19.4v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.4 12h2.2M19.4 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"></path>
+      </svg>
+      <svg class="ms-theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 13.4A8.2 8.2 0 1 1 10.6 4a6.6 6.6 0 0 0 9.4 9.4z"></path>
+      </svg>
+      <span class="ms-theme-label"></span>
+    </button>
   </div>
 </header>
+
+<style is:global>
+  .ms-themebtn{
+    margin-left:auto; display:inline-flex; align-items:center; gap:6px;
+    border:1px solid var(--ms-rule); background:transparent; color:var(--ms-ink-2);
+    font-family:var(--font-heading); font-size:var(--ms-micro); letter-spacing:.14em;
+    text-transform:uppercase; padding:5px 10px; min-height:30px; cursor:pointer;
+    border-radius:var(--radius-sm); line-height:1; white-space:nowrap;
+    transition:color .15s, border-color .15s;
+  }
+  .ms-themebtn:hover{ color:var(--ms-ink); border-color:var(--color-accent-600); }
+  .ms-themebtn:focus-visible{ outline:2px solid var(--color-accent-600); outline-offset:2px; }
+  .ms-themebtn svg{ width:14px; height:14px; flex:none; }
+  /* show the icon for the mode the button switches TO */
+  :root[data-theme="light"] .ms-theme-sun,
+  :root[data-theme="dark"] .ms-theme-moon{ display:none; }
+  @media (max-width:700px){ .ms-theme-label{ display:none; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('ms-theme-toggle');
+    if (!btn) return;
+    var label = btn.querySelector('.ms-theme-label');
+
+    function paint() {
+      var dark = root.dataset.theme === 'dark';
+      label.textContent = dark ? 'Light' : 'Dark';
+      btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      var meta = document.querySelector('meta[name="theme-color"]:not([media])');
+      if (meta) meta.content = dark ? '#1d1f20' : '#f2f2f3';
+    }
+
+    btn.addEventListener('click', function () {
+      var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('ms-theme', next); } catch (e) {}
+      paint();
+    });
+
+    paint();
+  })();
+</script>
 
 <div class="ms-page">
   {crumbs && (
