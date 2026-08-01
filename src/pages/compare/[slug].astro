@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Stamp from '../../components/Stamp.astro';
 import { vendors, bySlug, money, KLASS_LABEL, KLASS_PHRASE, PAIRS, pairSlug, badge, VERIFIED_LABEL } from '../../data/site.js';
+import { analyse } from '../../data/analysis.js';
 
 export function getStaticPaths() {
   return PAIRS
@@ -25,6 +26,7 @@ const rows = [
   ['Payment processing', v => v.processing || 'Not published', () => false],
 ];
 
+const findings = analyse(a, b);
 const differentClass = a.klass !== b.klass;
 const onePriced = a.pricingPublic !== b.pricingPublic;
 ---
@@ -87,6 +89,26 @@ const onePriced = a.pricingPublic !== b.pricingPublic;
   </div>
 </section>
 
+{findings.length ? (
+  <section class="ms-section">
+    <p class="ms-kicker">What the numbers actually say</p>
+    <h2 class="ms-h2">Read before you compare the headline prices</h2>
+    <p class="ms-measure">
+      Each point below is computed from the published figures in the table above, for this pair
+      specifically. Where the data does not support a conclusion, we say so rather than filling
+      the space.
+    </p>
+    <div class="ms-stack">
+      {findings.map(f => (
+        <div class={`ms-callout${f.kind === 'promo' || f.kind === 'setup-flip' || f.kind === 'setup-fee' ? ' ms-callout-caution' : f.kind === 'no-price' || f.kind === 'disclosure' ? '' : ' ms-callout-accent'}`}>
+          <p class="ms-callout-title">{f.title}</p>
+          <p>{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+) : null}
+
 {onePriced && (
   <section class="ms-section">
     <div class="ms-callout">
@@ -124,24 +146,13 @@ const onePriced = a.pricingPublic !== b.pricingPublic;
 
 <section class="ms-section">
   <h2 class="ms-h2">How to decide</h2>
-  <h3 class="ms-h3">Settle the category question first</h3>
   <p class="ms-measure">
-    If you document procedures, a booking-only platform is not a candidate at any price.
-  </p>
-  <h3 class="ms-h3">Convert both to your shape</h3>
-  <p class="ms-measure">
-    Compare locations and providers rather than sticker prices. Per-location and per-user models
-    diverge sharply once you are past a solo practice.
-    <a href="/cost-calculator/">The calculator does this.</a>
-  </p>
-  <h3 class="ms-h3">Add the modules you will actually turn on</h3>
-  <p class="ms-measure">
-    In this category, forms, e-prescribing, marketing and text messaging are frequently separate
-    line items rather than plan features.
-  </p>
-  <h3 class="ms-h3">Make them demonstrate charting with your treatments</h3>
-  <p class="ms-measure">
-    And get the BAA in writing before migrating any patient data.
+    Two things settle most of it, and neither is the headline price. Whether you document
+    treatments rules one of these in or out before cost matters at all — and once you have
+    fixed your own location and staff counts, the numbers above move.
+    <a href="/cost-calculator/">Run both through the calculator</a> rather than comparing
+    sticker prices, then ask each vendor to demonstrate charting with your own treatment types
+    and get the BAA in writing before you migrate any patient data.
   </p>
 </section>
 
