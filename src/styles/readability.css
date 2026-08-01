@@ -1,0 +1,157 @@
+/* ============================================================================
+   Readability layer — loaded AFTER tokens.css and components.css.
+
+   The design system is left untouched so it can be re-synced from Claude
+   Design. Everything here is a measured correction, not a restyle:
+
+   1. Light mode's --ms-ink-3 rendered at 2.97:1 against the page ground,
+      below the WCAG AA floor of 4.5:1 — and it carries card descriptions,
+      stat captions, the verification note, breadcrumbs and table nil values.
+      Dark mode already passed, so only light needed raising.
+   2. Body copy was 15px / 1.55, which is UI density applied to prose.
+   3. Paragraphs now set in a text face rather than the UI grotesque. Barlow
+      Condensed keeps the headings, Barlow keeps tables, labels and figures
+      where tabular numerals matter.
+
+   Run `node scripts/contrast.mjs` after changing any value below.
+   ========================================================================= */
+
+@font-face {
+  font-family: "Source Serif 4";
+  src: url(/fonts/source-serif.woff2) format("woff2");
+  font-weight: 200 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url(/fonts/source-serif-italic.woff2) format("woff2");
+  font-weight: 200 900; font-style: italic; font-display: swap;
+}
+
+:root {
+  --font-text: "Source Serif 4", Charter, "Iowan Old Style", Georgia, serif;
+
+  /* Reading sizes, up from the system's UI-density defaults */
+  --ms-body: 17px;
+  --ms-read: 18.5px;
+  --ms-lede: clamp(19px, 1.45vw, 21px);
+  --ms-small: 14px;
+  --ms-micro: 11.5px;
+  --ms-measure: 68ch;
+
+  /* Light mode contrast repair — see the header comment */
+  --ms-ink-2: color-mix(in srgb, var(--color-text) 74%, transparent);
+  --ms-ink-3: color-mix(in srgb, var(--color-text) 62%, transparent);
+}
+
+/* Dark mode already met AA; keep its ramp but match the new proportions. */
+:root[data-theme="dark"], .ms-dark {
+  --ms-ink-2: color-mix(in srgb, #f2f2f3 78%, transparent);
+  --ms-ink-3: color-mix(in srgb, #f2f2f3 62%, transparent);
+}
+
+body { font-size: var(--ms-body); line-height: 1.6; }
+
+/* — prose ---------------------------------------------------------------
+   Serif for anything read in sentences. Everything else stays on Barlow.
+
+   The :not() list matters: eyebrows, kickers and callout titles are <p>
+   elements too, and without excluding them the descendant selector below
+   drags the label system into the text face. */
+.ms-section > p:not(.ms-lede):not(.ms-eyebrow):not(.ms-kicker):not(.ms-callout-title):not(.ms-scrollnote):not(.ms-stat-cap),
+.ms-measure:not(.ms-lede):not(.ms-kicker),
+.ms-callout p:not(.ms-callout-title),
+.ms-linkcard-desc,
+li {
+  font-family: var(--font-text);
+  font-size: var(--ms-read);
+  line-height: 1.72;
+  letter-spacing: 0;
+}
+
+/* Labels stay in the condensed system face regardless of element. */
+.ms-eyebrow, .ms-kicker, .ms-callout-title, .ms-stat-cap,
+.ms-scrollnote, .ms-crumb, .ms-badge, .ms-linkcard-meta, .ms-stamp-note {
+  font-family: var(--font-heading);
+}
+.ms-stat-cap, .ms-stamp-note, .ms-scrollnote {
+  text-transform: none; letter-spacing: .01em;
+}
+/* Specificity note: the prose selector above carries five :not() clauses,
+   which pushes it to 0-6-1 — far above anything a plain class can reach. So
+   the lede is excluded there by name rather than out-specified here. */
+.ms-lede {
+  font-family: var(--font-text);
+  font-size: var(--ms-lede);
+  line-height: 1.62;
+  color: var(--ms-ink-2);
+}
+.ms-callout p { font-size: 17px; line-height: 1.68; }
+.ms-linkcard-desc { font-size: 16px; line-height: 1.6; }
+
+p + p { margin-top: 1.05em; }
+.ms-measure strong, .ms-section > p strong { font-weight: 600; }
+em { font-style: italic; }
+
+/* Links inside prose: underlined, because colour alone is not an affordance
+   and the accent is deliberately quiet. */
+.ms-section > p a, .ms-measure a, .ms-callout p a, li a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.5px;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+.ms-section > p a:hover, .ms-measure a:hover, .ms-callout p a:hover, li a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* — headings ------------------------------------------------------------ */
+.ms-h2 { margin-bottom: var(--space-4); }
+.ms-h3 { margin-top: var(--space-8); margin-bottom: var(--space-3); }
+.ms-display + .ms-lede { margin-top: var(--space-4); }
+
+/* — tables: stay sans, but readable ------------------------------------- */
+.ms-data, .ms-compare { font-size: 15.5px; }
+.ms-data td, .ms-data th, .ms-compare td, .ms-compare th {
+  padding-block: 13px;
+  line-height: 1.55;
+}
+.ms-data .prose, .ms-compare td { max-width: 46ch; }
+.ms-data thead th, .ms-compare thead th { font-size: 11.5px; letter-spacing: .1em; }
+.ms-cell-name { font-size: 16px; }
+
+/* — small print that is still content ----------------------------------- */
+.ms-stat-cap { font-size: 14px; line-height: 1.5; color: var(--ms-ink-2); }
+.ms-stamp-note { font-size: 13.5px; line-height: 1.6; }
+.ms-scrollnote { font-size: 13.5px; }
+.ms-crumb { font-size: 11.5px; }
+.ms-disclosure, .ms-footer .ms-measure { font-family: var(--font-text); font-size: 15.5px; line-height: 1.68; }
+
+/* Badges carry meaning, so they need weight rather than whisper. */
+.ms-badge { font-size: 11px; letter-spacing: .06em; }
+
+@media (max-width: 640px) {
+  :root { --ms-read: 17.5px; --ms-body: 16.5px; }
+  .ms-data, .ms-compare { font-size: 15px; }
+}
+
+/* — list and heading rhythm on the prose pages ---------------------------
+   The converted pages (methodology, about, disclosure) put content directly
+   in <main> rather than inside .ms-section, so they miss the system's
+   vertical rhythm and their lists run the full page width while the
+   paragraphs beside them are held to the measure. */
+main > ul, main > ol,
+.ms-section > ul, .ms-section > ol {
+  max-width: var(--ms-measure);
+  padding-left: 1.35em;
+  margin-block: var(--space-4) var(--space-6);
+}
+main > ul li, main > ol li, .ms-section li { margin-bottom: .7em; padding-left: .2em; }
+main > ul li::marker, main > ol li::marker { color: var(--ms-ink-3); }
+
+main > .ms-lede { margin-bottom: var(--space-8); }
+main > .ms-h2 { margin-top: calc(var(--space-8) * 1.5); }
+main > .ms-h3 { margin-top: var(--space-8); }
+main > p { max-width: var(--ms-measure); }
+
+/* The stamp note reads as a sentence, so give it room to be one. */
+.ms-stamp-note { max-width: 62ch !important; }

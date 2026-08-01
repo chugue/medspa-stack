@@ -33,7 +33,7 @@
     ],
     "startingPrice": 0,
     "setupFee": 0,
-    "freeTrial": "yes on Plus and Premium — the page renders the length as an unresolved template variable (\"{{sub2_api.num_free_trial_days}} days\") rather than a fixed number, so the exact length could not be verified from the page",
+    "freeTrial": "yes on Plus and Premium — Square publishes the length as an unresolved template variable, so the exact number of days could not be verified",
     "hiddenCosts": "The $0 plan's true cost is processing: 2.6% + 15¢ in-person on Free versus 2.4% + 15¢ on Premium, so a high-volume med spa can pay for the subscription purely in rate savings — or lose money staying free. Manual entry and card-on-file are 3.5% + 15¢ on EVERY tier, which is punishing for a memberships-and-packages med spa that stores cards. Afterpay is 6% + 30¢. Gift card load fee is 2.5% on Free and Plus, 0% only on Premium. Text marketing overage is 3¢/text on Plus and 1.5¢/text on Premium. Pricing is per location. Hardware is sold separately. NOTE: online processing showed inconsistently on the page (2.9% + 30¢ generally, 3.3% + 30¢ against Plus) — verify the online rate directly with Square before publishing it.",
     "processing": "In-person: Free 2.6% + 15¢, Plus 2.5% + 15¢, Premium 2.4% + 15¢. Online: 2.9% + 30¢ (Plus row displayed 3.3% + 30¢ — inconsistent on page). Manual entry / card on file: 3.5% + 15¢ all tiers. Afterpay: 6% + 30¢",
     "hipaa": "No HIPAA compliance or BAA statement appears on the Square Appointments pricing page. Square is not positioned as a HIPAA-covered platform for this product.",
